@@ -30,12 +30,6 @@ const numArr: number[] = [1, 2, 3, 4, 5]
 
 
 // Any
-let obj: any = { x: 0 };
-obj.foo();
-obj();
-obj.bar = 100;
-obj = "hello";
-const n: number = obj;
 
 
 // function 
@@ -242,7 +236,7 @@ const getObjToReq = (obj: ReqToPost) => {
     pushToPostReq(obj)
 }
 
-const pushToPostReq = (obj) => {
+const pushToPostReq = (obj: any) => {
     fetch('asdasd', {
         method: 'POST', // или 'PUT'
         body: JSON.stringify(obj), // данные могут быть 'строкой' или {объектом}!
@@ -279,7 +273,7 @@ function toPadLeft(count: number | string, input: number) {
 const checkeds: string[] = [];
 
 const checkCheckedInput = (e) => {
-    if (checkeds.includes(e)) {
+    if (checkeds.indexOf(e) !== -1) {
         checkeds.filter((item: string) => item !== e.target.id)
     } else {
         checkeds.concat(e);
@@ -326,6 +320,7 @@ function getArea(shape: Shape): number {
     if (shape.shapeKind === 'oval') {
         return Math.PI * shape.radius! ** 2
     }
+    return 0
 }
 
 interface Square {
@@ -376,7 +371,7 @@ function greeter(fn: GreetFunction1) {
 }
 
 
-const enum links{
+const enum links {
     youtube = 'asjdhakjdhak',
     google = 'asdkasdjal',
     tg = 120938102938
@@ -386,3 +381,329 @@ const enum links{
 const createPass = (name, pass) => `${name}${pass}`
 const createPass1 = (name: string, pass: number | string) => `${name}${pass}`
 const createPass2 = (name: string = 'Yar', pass: number | string = 190) => `${name} ${pass}`
+const createPass3 = (name?: string, pass?: number | boolean) => `${name}, ${pass}`;
+
+// // rest 
+
+const createPass4 = (name: string, ...skills: Array<string>) => {
+    `${name}, have skills ${skills.join()}`
+}
+
+createPass4('a', 'b', 'c', 'd')
+
+
+// void 
+
+const voidFunction = (): void => {
+    console.log('asasdaskld')
+}
+
+const neverFunction = (msg: string): never => {
+    throw new Error('asldaj')
+}
+
+const neverFunction2 = (msg: string): never => {
+    while (true) {
+
+    }
+}
+
+
+// function varialble type
+
+let newFn: (firstArg: string) => void;
+
+const oldFn = (name: string): void => {
+    console.log('void old fn ' + name)
+}
+
+newFn = oldFn
+
+// with legasy code 
+
+let newFn1;
+
+function oldFn1(name: string): void {
+    console.log('allala')
+}
+
+newFn1 = oldFn1;
+
+
+
+// object 
+
+let user: { name: string, age: string, email?: string } = {
+    name: 'Yar',
+    age: '990'
+}
+
+user.email = 'aslkdjaskld@lksfdkl.com'
+user.age = '150';
+user.name = '12'
+
+// type 
+
+type User = {
+    name: string,
+    age: number,
+    isMarried: boolean
+    someInfo: string[]
+}
+
+
+let user111: User = {
+    name: "yar",
+    age: 122,
+    isMarried: true,
+    someInfo: ['a', '2', '@@']
+}
+
+
+//interface 
+
+type User1 = {
+    name: string,
+    age: number,
+    isMarried: boolean
+    someInfo: Array<string>
+    alala?: string,
+    getPassa?: () => string,
+}
+
+
+let user1112: User1 = {
+    name: "yar",
+    age: 122,
+    isMarried: true,
+    someInfo: ['a', '2', '@@'],
+    getPassa(): string {
+        return `${this.name}${this.age}`
+    }
+}
+
+let user1113: User1 = {
+    name: "yar",
+    age: 122,
+    isMarried: true,
+    someInfo: ['a', '2', '@@'],
+    alala: 'petro'
+}
+
+
+// classes 
+// class types 
+
+class UserAs {
+    name: string;
+    age: number;
+    nickName: string;
+
+    constructor(name: string, age: number, nickName: string) {
+        this.name = name,
+            this.age = age,
+            this.nickName = nickName
+    }
+
+}
+const userAs = new UserAs('Yar', 990, 'Deymos')
+
+
+class UserAs1 {
+    public name: string;
+    private age: number;
+    protected nickName: string;
+    readonly isHere: boolean
+
+    constructor(name: string, age: number, nickName: string, isHere: boolean) {
+        this.name = name,
+            this.age = age,
+            this.nickName = nickName
+        this.isHere = isHere
+    }
+}
+
+
+// add default property to class 
+
+class UserAs2 {
+    name: string;
+    surname: string = 'ayaya';
+    age: number = 123;
+
+    constructor(name: string) {
+        this.name = name
+    }
+
+    getPass(): string {
+        return `${this.name}`
+    }
+}
+
+
+const nema = new UserAs2("yarka")
+
+nema.getPass();
+
+
+class UserAs3 {
+    constructor(
+        public name: string,
+        public surname: string,
+        public age: number,
+        private list: string[],
+    ) { }
+}
+
+
+
+// getter setter
+
+class User33 {
+    private age: number = 20;
+    constructor(public name: string) { }
+
+    setAge(age: number) {
+        this.age = age
+    }
+
+    set myAge(age: number) {
+        this.age = age
+    }
+}
+
+const alalala = new User33('yar')
+
+alalala.setAge(30);
+alalala.myAge = 132;
+
+// с помощью методов и сеттеров можно менять свойства 
+
+// интерфейсы выполняют фн именование типов , надобьектная форма сущность которая помогает описат ьформу обьекта или как она будет выглядет в будущем
+
+interface UserLog {
+    name: string,
+    number: number
+}
+
+
+// расширямый интерфейс 
+
+interface SomeInterface {
+    name: string,
+    age: number,
+    [propName: string]: any
+}
+
+const yar: SomeInterface = {
+    name: 'yaraa',
+    age: 1250,
+    nickName: 'asdasda',
+    lala: true,
+    somkelol: 12
+}
+
+
+
+
+interface UserSomeInterFace {
+    name: string,
+    age: number,
+    getPassed(): string,
+}
+
+
+// для передачи в класс интерфейса делаем implements
+class Y121aar implements UserSomeInterFace {
+    name: string = 'Yararara';
+    age: number = 31;
+    getPassed() {
+        return `${this.name}${this.age}`
+    }
+}
+
+// JENERIC
+
+
+const getter = (data: any): any => data;
+// к каким ошибкам может привести 
+getter(10).lenght;
+getter('test').lenght; //undefined
+
+
+const getter1 = <T>(data: T): T => data;
+// es6
+
+function getter2<T>(data: T): T {
+    return data;
+}
+
+const fanc = <T>(agrs: T): T => {
+    return agrs
+}
+// es5
+fanc(10).length;
+fanc('test').length; //undefined
+fanc([11, 2, 2, 3, 4]).length; //undefined
+fanc<number>(10).length;
+fanc<number[]>([1, 2, 23, 3])
+
+
+
+class Usera<Karas, Lyash> {
+    constructor(public name: Karas, public age: Lyash) { }
+    public getPasssat(): string {
+        return `${this.name}${this.age}`
+    }
+}
+
+class Usera1<Karas> {
+    constructor(public name: Karas, public age: Karas) { }
+    public getPasssat(): string {
+        return `${this.name}${this.age}`
+    }
+}
+const ararat3 = new Usera1(true, false);
+
+const ararat = new Usera('ASDASD', 123123)
+const ararat2 = new Usera(123123, 'ASDASD');
+const ararat3 = new Usera(true, false);
+const ararat4 = new Usera([12, 31, 23, 123], true)
+
+ararat.getPasssat()
+
+class Calculator<Num> {
+    constructor(public arg1: Num, public arg2: Num, public res?: Num) { }
+
+    public add(): number {
+        this.print(this.res);
+        return this.res = this.arg1 + this.arg2
+    }
+
+    public minus(): number {
+        this.print(this.res);
+        return this.res = this.arg1 - this.arg2
+    }
+
+    public divide(): number {
+        this.print(this.res);
+        return this.res = this.arg1 - this.arg2
+    }
+
+    public multipy(): number {
+        this.print(this.res);
+        return this.res = this.arg1 - this.arg2
+    }
+
+    public getRandom(): number {
+        this.print(this.res);
+        return this.res = Math.floor(Math.random() * 30)
+    }
+
+    private print(data): string {
+        return `result${data}`
+    }
+}
+
+const calc = new Calculator(106, 241);
+calc.add()
