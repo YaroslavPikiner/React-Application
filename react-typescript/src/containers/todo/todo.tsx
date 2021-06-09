@@ -5,8 +5,8 @@ import TodoList from './todoList'
 
 interface TodoProps {
     inputTitle: string
-    changeHandler: (event: any) => void
-    addHandler: (event: any) => void
+    changeHandler: (event: string) => void
+    addHandler: (title: string) => void
     todos: ITodo[]
     deleteHandle: (item: number) => void
 }
@@ -16,8 +16,10 @@ const Todo: React.FC<TodoProps> = ({ inputTitle, changeHandler, addHandler, todo
 
     return (
         <>
-            <TodoForm inputTitle={inputTitle} addHandler={addHandler} changeHandler={changeHandler} />
-            <TodoList todos={todos} deleteHandle={deleteHandle}/>
+            <div className="container">
+                    <TodoForm inputTitle={inputTitle} addHandler={addHandler} changeHandler={changeHandler} />
+                    <TodoList todos={todos} deleteHandle={deleteHandle} />
+            </div>
         </>
     )
 }

@@ -1,7 +1,16 @@
 import React, { useState, useRef, useContext, createContext, useReducer } from 'react';
+import {
+    BrowserRouter as Router,
+    Route,
+    Switch,
+    RouteComponentProps
+} from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Todo from './containers/todo/todo';
 import { ITodo } from './containers/interfaces';
+import Counter from './containers/counter/counter';
+import Home from './containers/Home/Home';
+import Charts from './containers/charts/charts';
 
 const App: React.FC = () => {
     const [inputTitle, setInputTitle] = useState<string>('')
@@ -12,13 +21,18 @@ const App: React.FC = () => {
     }
 
     const addHandler = (title: string) => {
-        const newTodo: ITodo = {
-            id: Date.now(),
-            title: inputTitle,
-            completed: false,
+        if (inputTitle) {
+            const newTodo: ITodo = {
+                id: Date.now(),
+                title: inputTitle,
+                completed: false,
+            }
+            setTodos(prev => [newTodo, ...prev])
+            setInputTitle('')
+        } else {
+            return null
         }
-        setTodos(prev => [newTodo, ...prev])
-        setInputTitle('')
+
     }
 
 
@@ -29,11 +43,24 @@ const App: React.FC = () => {
 
     return (
         <>
-            <Navbar />
-            <div className="container">
-                <h1>Test</h1>
-                <Todo deleteHandle={deleteHandle} inputTitle={inputTitle} changeHandler={changeHandler} addHandler={addHandler} todos={todos} />
-            </div>
+            <Router>
+                <Navbar />
+                <Switch>
+                    <Route exact path='/'>
+                        <Home />
+                    </Route>
+                    <Route path='/todo'>
+                        <Todo deleteHandle={deleteHandle}
+                            inputTitle={inputTitle}
+                            changeHandler={changeHandler}
+                            addHandler={addHandler}
+                            todos={todos} />
+                    </Route>
+                    <Route path='/counter' component={Counter} />
+                    <Route path='/charts' component={Charts} />
+                </Switch>
+            </Router>
+
         </>
     )
 }
