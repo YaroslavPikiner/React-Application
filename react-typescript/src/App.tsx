@@ -1,79 +1,39 @@
 import React, { useState, useRef, useContext, createContext, useReducer } from 'react';
-// interface IUser {
-//     name: string;
-//     age?: number;
-// }
+import Navbar from './components/Navbar';
+import Todo from './containers/todo/todo';
+import { ITodo } from './containers/interfaces';
 
+const App: React.FC = () => {
+    const [inputTitle, setInputTitle] = useState<string>('')
+    const [todos, setTodos] = useState<ITodo[]>([]);
 
-// const Title = () => {
-//     const [value1, setValue] = useState(0);
-//     const [value2, setSetValue] = useState<number | undefined>(undefined);
-//     const [val, setTiVal] = useState<Array<number>>([])
-//     const [vala, setVala] = useState<IUser>({ name: 'YarrroslaV' })
-
-//     // useRef 
-
-//     const ref1 = useRef<HTMLElement>(null!);
-//     const ref2 = useRef<HTMLElement | null>(null);
-
-//     interface ITheme {
-//         bac: string,
-//         color: string,
-//     }
-
-//     const context = createContext<ITheme>({
-//         bac: 'Red',
-//         color: 'White'
-//     })
-
-//     const themeContext = useContext<ITheme>(context)
-
-
-//     type TitleProps = {
-//         title: string,
-//         test?: any,
-//         number?: number
-//     }
-
-// }
-
-
-
-
-
-// const Title1: React.FC<{ title: string }> = ({ title }) => {
-//     return <h1>{title}</h1>
-// }
-
-// const Title = ({ title }: TitleProps) => <p>{title}</p>
-
-
-
-
-
-const App = () => {
-    interface State { count: number }
-    type Action = { type: 'increment' | 'decrement' }
-
-
-    const counterReducer = ({ count }: State, { type }: Action) => {
-        switch (type) {
-            case 'decrement': return { count: count - 1 }
-            case 'increment': return { count: count + 1 }
-            default: return {};
-        }
+    const changeHandler = (event: string) => {
+        setInputTitle(event);
     }
 
-    const [state, dispatch] = useReducer(counterReducer, { count: 0 })
+    const addHandler = (title: string) => {
+        const newTodo: ITodo = {
+            id: Date.now(),
+            title: inputTitle,
+            completed: false,
+        }
+        setTodos(prev => [newTodo, ...prev])
+        setInputTitle('')
+    }
 
-    dispatch({ type: 'decrement' })
-    dispatch({ type: 'increment' })
+
+    const deleteHandle = (id: number) => {
+        const newList = todos.filter(item => item.id !== id)
+        setTodos(newList);
+    }
 
     return (
         <>
-            {count}
-            {/* <button onClick={handleDec}>Dec -</button>
-            <button onClick={handleInc}>Inc +</button> */}
+            <Navbar />
+            <div className="container">
+                <h1>Test</h1>
+                <Todo deleteHandle={deleteHandle} inputTitle={inputTitle} changeHandler={changeHandler} addHandler={addHandler} todos={todos} />
+            </div>
         </>
     )
 }
