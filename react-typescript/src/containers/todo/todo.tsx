@@ -1,5 +1,5 @@
 import React from 'react'
-import { ITodo } from '../interfaces'
+import { ITodo } from '../interfaces';
 import TodoForm from './todoForm'
 import TodoList from './todoList'
 

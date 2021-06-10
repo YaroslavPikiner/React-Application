@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Bar, Line, Pie, Radar, PolarArea } from 'react-chartjs-2';
+import { Bar, Line, Pie, Radar, PolarArea, Bubble } from 'react-chartjs-2';
 import { IChart } from './interfaceChar';
 
 interface Prop {
@@ -37,14 +37,14 @@ const Charts: React.FC<Prop> = () => {
         ],
     });
     console.log(data)
-    const add = ():void => {
+    const add = (): void => {
         setLengthOfChartLabel(lengthOfChartLabel + 1)
         setData(prev => ({
             ...prev,
             labels: [...data.labels, lengthOfChartLabel.toString()],
             data: {
                 datasets: [{
-                    data: Array.from({ length: lengthOfChartLabel + 1}, () =>
+                    data: Array.from({ length: lengthOfChartLabel + 1 }, () =>
                         Math.floor(Math.random() * 40)),
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
@@ -69,7 +69,7 @@ const Charts: React.FC<Prop> = () => {
     }
 
 
-    const remove = ():void => {
+    const remove = (): void => {
         setLengthOfChartLabel(lengthOfChartLabel - 2)
         setData(prev => ({
             ...prev,
@@ -86,7 +86,7 @@ const Charts: React.FC<Prop> = () => {
                 {
                     label: '# of Votes',
                     data: Array.from({ length: lengthOfChartLabel }, () =>
-                        Math.floor(Math.random() * 40)),
+                        Math.floor(Math.random() * 140)),
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
@@ -133,6 +133,9 @@ const Charts: React.FC<Prop> = () => {
                 </div>
                 <div className="col s12 m6">
                     <PolarArea type='polarArea' height={300} width={400} data={data} options={{ maintainAspectRatio: false }} />
+                </div>
+                <div className="col s12 m6">
+                    <Bubble type='bubble' height={300} width={400} data={data} options={{ maintainAspectRatio: false }} />
                 </div>
             </div>
         </div>
