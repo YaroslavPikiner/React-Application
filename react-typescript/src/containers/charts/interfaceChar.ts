@@ -7,8 +7,14 @@ export interface IChart {
     redraw?: boolean;
     type: string;
     data: {
-        labels: string[],
-        datasets: IDatasets,
+        labels?: string | number[],
+        datasets: [{
+            label: string,
+            data: number | string[],
+            backgroundColor: string[],
+            borderColor: string[],
+            borderWidth: number,
+        }],
         options: {
             scales: {
                 y: {
@@ -19,10 +25,3 @@ export interface IChart {
     }
 }
 
-interface IDatasets {
-    label: string;
-    data: number[];
-    backgroundColor: string[];
-    borderColor: string[];
-    borderWidth: number;
-}
