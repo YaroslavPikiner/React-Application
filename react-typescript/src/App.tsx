@@ -1,37 +1,69 @@
+import React, { useState } from 'react';
+import {
+    BrowserRouter as Router,
+    Route,
+    Switch,
+} from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Todo from './containers/todo/todo';
+import { ITodo } from './containers/interfaces';
+import Counter from './containers/counter/counter';
+import Form from './containers/form/index';
+import Home from './containers/Home/Home';
+import Charts from './containers/charts/charts';
 
-import React from "react";
-import { RegisterOptions, useForm } from 'react-hook-form';
-import { NewNoteInput } from "./containers/todo/newNoteInput";
+const App: React.FC = () => {
+    const [inputTitle, setInputTitle] = useState<string>('')
+    const [todos, setTodos] = useState<ITodo[]>([]);
 
-type Profile = {
-  firstName: string,
-  lastName: string,
-  age: number
-}
+    const changeHandler = (event: string) => {
+        setInputTitle(event);
+    }
+
+    const addHandler = (title: string) => {
+        if (inputTitle) {
+            const newTodo: ITodo = {
+                id: Date.now(),
+                title: inputTitle,
+                isCompleted: false,
+            }
+            setTodos(prev => [newTodo, ...prev])
+            setInputTitle('')
+        } else {
+            return null
+        }
+
+    }
 
 
-const App = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm<Profile>();
-  const onSubmit = handleSubmit((data) => console.log(data));
+    const deleteHandle = (id: number) => {
+        const newList = todos.filter(item => item.id !== id)
+        setTodos(newList);
+    }
 
-  return (
-    <>
-      <form onSubmit={onSubmit}>
-        <div>
-          <label htmlFor="firstName">firstName</label>
-          <input type="text"  {...register("firstName")} id='firsName' name='firstName' />
+    return (
+        <>
+            <Router>
+                <Navbar />
+                <Switch>
+                    <Route exact path='/'>
+                        <Home />
+                    </Route>
+                    <Route path='/todo'>
+                        <Todo deleteHandle={deleteHandle}
+                            inputTitle={inputTitle}
+                            changeHandler={changeHandler}
+                            addHandler={addHandler}
+                            todos={todos} />
+                    </Route>
+                    <Route path='/counter' component={Counter} />
+                    <Route path='/charts' component={Charts} />
+                    <Route path='/form' component={Form} />
+                </Switch>
+            </Router>
 
-          <label htmlFor="lastName">lastName</label>
-          <input  {...register("lastName")} type="text" id='lastName' name='lastName' />
-
-          <label htmlFor="age">age</label>
-          <input {...register("age")} type="text" id='age' name='age' />
-
-          <button type='submit'>Save</button>
-        </div>
-      </form>
-    </>
-  );
+        </>
+    )
 }
 
 export default App;
