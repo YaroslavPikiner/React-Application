@@ -1,29 +1,35 @@
 
 import React from "react";
+import { RegisterOptions, useForm } from 'react-hook-form';
 import { NewNoteInput } from "./containers/todo/newNoteInput";
-import { useSelector, useDispatch } from "react-redux";
-import { NotesState } from "./redux/noteReducer";
-import { addNote } from "./redux/actions";
 
-function App() {
-  const notes = useSelector<NotesState, NotesState["notes"]>(
-    (state) => state.notes
-  );
-  const dispatch = useDispatch();
+type Profile = {
+  firstName: string,
+  lastName: string,
+  age: number
+}
 
-  const onAddNote = (note: string) => {
-    dispatch(addNote(note));
-  };
+
+const App = () => {
+  const { register, handleSubmit, formState: { errors } } = useForm<Profile>();
+  const onSubmit = handleSubmit((data) => console.log(data));
 
   return (
     <>
-      <NewNoteInput addNote={onAddNote} />
-      <hr />
-      <ul>
-        {notes.map((note) => {
-          return <li key={note}>{note}</li>;
-        })}
-      </ul>
+      <form onSubmit={onSubmit}>
+        <div>
+          <label htmlFor="firstName">firstName</label>
+          <input type="text"  {...register("firstName")} id='firsName' name='firstName' />
+
+          <label htmlFor="lastName">lastName</label>
+          <input  {...register("lastName")} type="text" id='lastName' name='lastName' />
+
+          <label htmlFor="age">age</label>
+          <input {...register("age")} type="text" id='age' name='age' />
+
+          <button type='submit'>Save</button>
+        </div>
+      </form>
     </>
   );
 }
