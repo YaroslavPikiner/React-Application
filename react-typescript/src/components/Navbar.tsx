@@ -20,6 +20,9 @@ const Navbar: React.FC = () => {
                         <li className="active"><a href="#">  <Link to='/counter' className='logo'>
                             Counter
                         </Link></a></li>
+                        <li className="active"><a href="#">  <Link to='/forms' className='logo'>
+                            forms
+                        </Link></a></li>
                     </ul>
                 </div>
             </nav>

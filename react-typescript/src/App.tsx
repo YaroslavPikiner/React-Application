@@ -1,31 +1,76 @@
+import React, { useState, useRef, useContext, createContext, useReducer } from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+} from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Todo from './containers/todo/todo';
+import { ITodo } from './containers/interfaces';
+import Counter from './containers/counter/counter';
+import Home from './containers/Home/Home';
+import Charts from './containers/charts/charts';
+import Forms from './containers/forms';
 
-import React from "react";
-import { NewNoteInput } from "./containers/todo/newNoteInput";
-import { useSelector, useDispatch } from "react-redux";
-import { NotesState } from "./redux/noteReducer";
-import { addNote } from "./redux/actions";
+const App: React.FC = () => {
+  const [inputTitle, setInputTitle] = useState<string>('')
+  const [todos, setTodos] = useState<ITodo[]>([]);
 
-function App() {
-  const notes = useSelector<NotesState, NotesState["notes"]>(
-    (state) => state.notes
-  );
-  const dispatch = useDispatch();
+  const changeHandler = (event: string) => {
+    setInputTitle(event);
+  }
 
-  const onAddNote = (note: string) => {
-    dispatch(addNote(note));
-  };
+  const addHandler = (title: string) => {
+    const newTodo: ITodo = {
+      id: Date.now(),
+      title: inputTitle,
+      isCompleted: false,
+    }
+    setTodos(prev => [newTodo, ...prev])
+    setInputTitle('')
+  }
+
+
+  const deleteHandle = (id: number) => {
+    const newList = todos.filter(item => item.id !== id)
+    setTodos(newList);
+  }
+
+
+  const onMarkDone = (id: number) => {
+    const newTodos = [...todos];
+    newTodos.map(item => {
+      return item.id === id ? item.isCompleted = !item.isCompleted : null
+    })
+    setTodos(newTodos)
+  }
 
   return (
     <>
-      <NewNoteInput addNote={onAddNote} />
-      <hr />
-      <ul>
-        {notes.map((note) => {
-          return <li key={note}>{note}</li>;
-        })}
-      </ul>
+      <Router>
+        <Navbar />
+        <Switch>
+          <Route exact path='/'>
+            <Home />
+          </Route>
+          <Route path='/todo'>
+            <Todo deleteHandle={deleteHandle}
+              inputTitle={inputTitle}
+              changeHandler={changeHandler}
+              addHandler={addHandler}
+              onMarkDone={onMarkDone}
+              todos={todos}
+            />
+          </Route>
+          <Route path='/counter' component={Counter} />
+          <Route path='/charts' component={Charts} />
+          <Route path='/forms' component={Forms} />
+
+        </Switch>
+      </Router>
+
     </>
-  );
+  )
 }
 
-export default App;
+export default App
