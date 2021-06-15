@@ -5,6 +5,10 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import Toolbar from '@material-ui/core/Toolbar';
+import AppBar from '@material-ui/core/AppBar';
+
+
 
 enum GenderEnum {
     female = "female",
@@ -57,7 +61,10 @@ const useStyles = makeStyles((theme: Theme) =>
             margin: theme.spacing(1),
             marginBottom: theme.spacing(6),
 
-        }
+        },
+        appBar: {
+            position: 'relative',
+        },
     }),
 );
 
@@ -79,6 +86,13 @@ const RegForm: React.FC = () => {
 
     return (
         <form className={classes.root} onSubmit={onSubmit}>
+            <AppBar position="absolute" color="default" className={classes.appBar}>
+                <Toolbar>
+                    <Typography variant="h6" color="inherit" noWrap>
+                        Registrations
+                    </Typography>
+                </Toolbar>
+            </AppBar>
             <TextField
                 label="First Name"
                 {...register("firstName", { required: true })}

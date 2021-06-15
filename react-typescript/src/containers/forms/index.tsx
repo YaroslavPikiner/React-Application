@@ -3,7 +3,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import LoginForm from './loginForm';
 import RegForm from './registrationForm';
-import OrderForm from './orderForm';
+import OrderForm from './OrderForm/orderForm';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import AppBar from '@material-ui/core/AppBar';
