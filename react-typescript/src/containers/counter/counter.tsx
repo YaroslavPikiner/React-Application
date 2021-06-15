@@ -1,28 +1,57 @@
 import React, { useState } from 'react';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+import { useSelector, shallowEqual, useDispatch } from "react-redux"
+import { incrementCount, decrementCount } from "../../redux/actionCreators";
+import { Dispatch } from "redux"
+
+
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        root: {
+            flexGrow: 1,
+        },
+        paper: {
+            padding: theme.spacing(2),
+            textAlign: 'center',
+            color: theme.palette.text.secondary,
+        },
+    }),
+);
 
 const Counter: React.FC = () => {
-    const [count, setCount] = useState<number>(0)
+    const classes = useStyles();
+
+    const dispatch: Dispatch<any> = useDispatch()
+    const count: any = useSelector(
+        (state: ArticleState) => state.counter,
+    )
+
+    console.log(dispatch);
 
     const inc = () => {
-        setCount(() => count + 1)
+        dispatch(incrementCount())
     }
-
 
     const dec = () => {
-        setCount(() => count - 1)
+        dispatch(decrementCount())
     }
 
-
+    
     return (
-        <>
-            <div className="container">
-                <div className="row">
+        <div className={classes.root}>
+            <Grid container direction="row"
+                justify="center"
+                alignItems="center"
+                spacing={3}>
+                <Grid item xs className={classes.paper}>
                     {count}
                     <button onClick={dec}>Dec - </button>
                     <button onClick={inc}>Inc +</button>
-                </div>
-            </div>
-        </>
+                </Grid>
+            </Grid>
+        </div>
     )
 }
 

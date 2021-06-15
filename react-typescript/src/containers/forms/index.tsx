@@ -16,7 +16,6 @@ interface TabPanelProps {
     value: any;
 }
 
-
 function a11yProps(index: any) {
     return {
         id: `scrollable-auto-tab-${index}`,

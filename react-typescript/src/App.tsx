@@ -11,6 +11,8 @@ import Counter from './containers/counter/counter';
 import Home from './containers/Home/Home';
 import Charts from './containers/charts/charts';
 import Forms from './containers/forms';
+import MainArticle from './containers/articles/index';
+import SpaceStation from './containers/spaceStation/index';
 
 const App: React.FC = () => {
   const [inputTitle, setInputTitle] = useState<string>('')
@@ -65,6 +67,8 @@ const App: React.FC = () => {
           <Route path='/counter' component={Counter} />
           <Route path='/charts' component={Charts} />
           <Route path='/forms' component={Forms} />
+          <Route path='/articles' component={MainArticle} />
+          <Route path='/space' component={SpaceStation} />
 
         </Switch>
       </Router>

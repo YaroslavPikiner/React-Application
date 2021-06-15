@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
@@ -12,7 +12,6 @@ import Typography from '@material-ui/core/Typography';
 import AddressForm from './AddressForm';
 import PaymentForm from './PaymentForm';
 import Review from './Review';
-
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -53,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
 
 const steps = ['Shipping address', 'Payment details', 'Review your order'];
 
-const getStepContent = (step: number)  => {
+const getStepContent = (step: number) => {
     switch (step) {
         case 0:
             return <AddressForm />;
@@ -66,9 +65,9 @@ const getStepContent = (step: number)  => {
     }
 }
 
-export default function OrderForm() {
+const OrderForm: React.FC = () => {
     const classes = useStyles();
-    const [activeStep, setActiveStep] = React.useState(0);
+    const [activeStep, setActiveStep] = useState(0);
 
     const handleNext = () => {
         setActiveStep(activeStep + 1);
@@ -137,3 +136,5 @@ export default function OrderForm() {
         </>
     );
 }
+
+export default OrderForm;
