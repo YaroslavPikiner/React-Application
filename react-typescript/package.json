@@ -4,7 +4,13 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.4",
+<<<<<<< HEAD
     "@material-ui/lab": "^4.0.0-alpha.58",
+=======
+    "@material-ui/icons": "^4.11.2",
+    "@material-ui/lab": "*",
+    "@react-google-maps/api": "^2.2.0",
+>>>>>>> 221627c7c9dd459009914c5273f7ab8c4e3e3375
     "@reduxjs/toolkit": "^1.6.0",
     "@testing-library/jest-dom": "^5.13.0",
     "@testing-library/react": "^11.2.7",
@@ -12,8 +18,12 @@
     "@types/jest": "^26.0.23",
     "@types/react": "^17.0.9",
     "@types/react-dom": "^17.0.6",
+<<<<<<< HEAD
     "@types/react-redux": "^7.1.16",
     "chart.js": "^3.3.2",
+=======
+    "antd": "^4.16.2",
+>>>>>>> 221627c7c9dd459009914c5273f7ab8c4e3e3375
     "react": "^17.0.2",
     "react-chartjs-2": "^3.0.3",
     "react-dom": "^17.0.2",
@@ -24,6 +34,7 @@
     "redux": "^4.1.0",
     "redux-devtools-extension": "^2.13.9",
     "redux-localstorage-simple": "^2.4.1",
+    "redux-thunk": "^2.3.0",
     "typescript": "^4.3.2",
     "web-vitals": "^1.1.2"
   },
@@ -53,6 +64,9 @@
   },
   "devDependencies": {
     "@types/node": "^15.12.2",
-    "@types/react-router-dom": "^5.1.7"
+    "@types/react-redux": "^7.1.16",
+    "@types/react-router-dom": "^5.1.7",
+    "@types/redux": "^3.6.0",
+    "@types/redux-thunk": "^2.1.0"
   }
 }

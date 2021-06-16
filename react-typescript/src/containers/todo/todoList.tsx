@@ -5,13 +5,14 @@ import TodoItem from './todoItem'
 type Todos = {
     todos: ITodo[]
     deleteHandle: (item: number) => void
+    onMarkDone: (id: number) => void
 }
 
-const TodoList: React.FC<Todos> = ({ todos, deleteHandle }) => {
+const TodoList: React.FC<Todos> = ({ todos, deleteHandle, onMarkDone }) => {
     return (
         <>
             <ul className="collection">
-                {todos.map(item => <TodoItem key={item.id} deleteHandle={deleteHandle} item={item} />)}
+                {todos.map(item => <TodoItem key={item.id} onMarkDone={onMarkDone} deleteHandle={deleteHandle} item={item} />)}
             </ul>
         </>
     )
