@@ -272,7 +272,7 @@ function toPadLeft(count: number | string, input: number) {
 
 const checkeds: string[] = [];
 
-const checkCheckedInput = (e) => {
+const checkCheckedInput = (e: any) => {
     if (checkeds.indexOf(e) !== -1) {
         checkeds.filter((item: string) => item !== e.target.id)
     } else {
@@ -378,7 +378,7 @@ const enum links {
 }
 
 
-const createPass = (name, pass) => `${name}${pass}`
+const createPass = (name: any, pass: any) => `${name}${pass}`
 const createPass1 = (name: string, pass: number | string) => `${name}${pass}`
 const createPass2 = (name: string = 'Yar', pass: number | string = 190) => `${name} ${pass}`
 const createPass3 = (name?: string, pass?: number | boolean) => `${name}, ${pass}`;
@@ -707,3 +707,41 @@ class Calculator<Num> {
 
 const calc = new Calculator(106, 241);
 calc.add()
+
+
+type PhotoType = {
+    large: string,
+    small: string,
+}
+
+type UserType = {
+    name: string,
+    lastName: string,
+    age: number
+}
+
+
+type SerRes<D> = {
+    errCode: number,
+    message: string[],
+    data: D
+}
+
+const res1: SerRes<UserType> = {
+    errCode: 1,
+    message: ['asd', 'asda'],
+    data: {
+        name: 'das',
+        lastName: 'asda',
+        age: 32
+    }
+}
+
+const res2: SerRes<PhotoType> = {
+    errCode: 1,
+    message: ['asd', 'asda'],
+    data: {
+        large: 'string',
+        small: 'string',
+    }
+}
