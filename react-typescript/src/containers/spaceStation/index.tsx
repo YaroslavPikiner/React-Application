@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from 'react';
 import ListAstro from './list';
 import Map from './map.jsx';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
@@ -5,11 +6,13 @@ import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
 import AppBar from '@material-ui/core/AppBar';
 import Grid from '@material-ui/core/Grid';
-import React, { useEffect, useState } from 'react';
 
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
+        root: {
+            width: '100%',
+        },
         appBar: {
             position: 'relative',
         },
@@ -34,11 +37,12 @@ const SpaceStation = () => {
                     </Typography>
                 </Toolbar>
             </AppBar>
-            <Grid container>
-                <Grid item xs={6} spacing={3}>
+            <Grid className={classes.root} container direction="row"
+                justify="space-evenly">
+                <Grid item xs={2} sm={2}>
                     <Map />
                 </Grid>
-                <Grid item xs={6} spacing={3}>
+                <Grid item xs={2} sm={2} >
                     <ListAstro mapAstro={mapAstro} />
                 </Grid>
             </Grid>
