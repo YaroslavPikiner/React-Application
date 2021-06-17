@@ -11,6 +11,10 @@ export type ITodo = {
   isCompleted: boolean
 }
 
+export type TodoState = {
+  todos: ITodo[]
+}
+
 export type ArticleState = {
   articles: IArticle[]
 }
@@ -20,5 +24,3 @@ export type CounterState = {
 }
 
 
-
-export type DispatchType = (args: ArticleAction | CounterAction) => ArticleAction | CounterAction
