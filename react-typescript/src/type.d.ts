@@ -1,33 +1,24 @@
-interface IArticle {
+export interface IArticle {
   id: number
   title: string
   body: string
 }
+export type ICounter = number
 
-interface ICounter {
-  counter: number
+export type ITodo = {
+  id: number,
+  title: string,
+  isCompleted: boolean
 }
 
-type ArticleState = {
+export type ArticleState = {
   articles: IArticle[]
-  counter: number
 }
 
-type ArticleAction = {
-  type: string
-  article: IArticle
-}
-
-type CountAction = {
-  type: string
+export type CounterState = {
   counter: ICounter
 }
 
-interface ITodo {
-  title: string,
-  id: number,
-  isCompleted: boolean,
-}
 
-type DispatchType = (args: ArticleAction) => ArticleAction
-type DispatchType = (args: CountAction) => CountAction
+
+export type DispatchType = (args: ArticleAction | CounterAction) => ArticleAction | CounterAction

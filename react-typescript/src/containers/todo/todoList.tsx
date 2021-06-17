@@ -1,4 +1,5 @@
 import React from 'react';
+import { ITodo } from '../../type';
 import TodoItem from './todoItem'
 
 type Todos = {

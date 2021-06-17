@@ -1,39 +1,40 @@
 import * as actionTypes from "./actionTypes";
+import { IArticle } from "../type";
+import { ActionCreator } from "redux";
+export interface INewArticleAction {
+  type: string,
+  payload: IArticle
+}
 
-export function addArticle(article: IArticle) {
-  const action: ArticleAction = {
+
+export interface INewCounter {
+  type: string,
+}
+
+export const addArticle: ActionCreator<INewArticleAction> = (payload: IArticle) => {
+  return {
     type: actionTypes.ADD_ARTICLE,
-    article,
+    payload
   }
-  return simulateHttpRequest(action)
 }
 
-export function removeArticle(article: IArticle) {
-  const action: ArticleAction = {
+export function removeArticle(payload: IArticle) {
+  return {
     type: actionTypes.REMOVE_ARTICLE,
-    article,
+    payload,
   }
-  return simulateHttpRequest(action)
+
 }
 
-export const incrementCount = () => {
-  const action: any = {
+export const incrementCount: ActionCreator<INewCounter> = () => {
+  return {
     type: actionTypes.INCREMENT
   }
-  return action
 }
 
-export const decrementCount = () => {
-  const action: any = {
+export const decrementCount: ActionCreator<INewCounter> = () => {
+  return {
     type: actionTypes.DECREMENT
   }
-  return action
 }
 
-export function simulateHttpRequest(action: ArticleAction) {
-  return (dispatch: DispatchType) => {
-    setTimeout(() => {
-      dispatch(action)
-    }, 500)
-  }
-}

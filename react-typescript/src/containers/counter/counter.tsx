@@ -5,6 +5,8 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { useSelector, shallowEqual, useDispatch } from "react-redux"
 import { incrementCount, decrementCount } from "../../redux/actionCreators";
 import { Dispatch } from "redux"
+import { CounterState } from '../../type';
+import { IAppState } from '../../redux/reducers/rootReducer';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -23,9 +25,9 @@ const useStyles = makeStyles((theme: Theme) =>
 const Counter: React.FC = () => {
     const classes = useStyles();
 
-    const dispatch: Dispatch<any> = useDispatch()
-    const count: any = useSelector(
-        (state: ArticleState) => state.counter,
+    const dispatch: Dispatch = useDispatch()
+    const count = useSelector(
+        (state: IAppState) => state.counterReducer.counter,
     )
 
     console.log(dispatch);
@@ -38,7 +40,7 @@ const Counter: React.FC = () => {
         dispatch(decrementCount())
     }
 
-    
+
     return (
         <div className={classes.root}>
             <Grid container direction="row"

@@ -12,6 +12,7 @@ import Charts from './containers/charts/charts';
 import Forms from './containers/forms';
 import MainArticle from './containers/articles/index';
 import SpaceStation from './containers/spaceStation/index';
+import { ITodo } from './type';
 
 const App: React.FC = () => {
   const [inputTitle, setInputTitle] = useState<string>('')
