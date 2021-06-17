@@ -16,19 +16,10 @@ const Map = () => {
 		width: '600px',
 		height: '600px',
 	};
-	console.log(mapData);
 
 	const center = {
 		lat: Number(mapData.latitude),
 		lng: Number(mapData.longitude),
-	};
-
-	const onLoad = (circle) => {
-		console.log('Circle onLoad circle: ', circle);
-	};
-
-	const onUnmount = (circle) => {
-		console.log('Circle onUnmount circle: ', circle);
 	};
 
 	return (
