@@ -1,6 +1,6 @@
 import * as actionTypes from "./actionTypes"
 
-const initialState: ArticleState = {
+const initialArticleState: ArticleState = {
     articles: [
         {
             id: 1,
@@ -19,7 +19,7 @@ const initialState: ArticleState = {
 }
 
 const reducer = (
-    state: ArticleState = initialState,
+    state: ArticleState = initialArticleState,
     action: ArticleAction
 ): ArticleState => {
     switch (action.type) {

@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
 import AppBar from '@material-ui/core/AppBar';
 import Grid from '@material-ui/core/Grid';
-
+import { motion } from 'framer-motion';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -28,6 +28,13 @@ const SpaceStation = () => {
             .then(res => setMapAstro(res.people))
     }, [])
 
+
+    const item = {
+        visible: { opacity: 1, x: 0 },
+        hidden: { opacity: 0, x: 100 },
+    };
+
+
     return (
         <>
             <AppBar position="absolute" color="default" className={classes.appBar}>
@@ -40,10 +47,14 @@ const SpaceStation = () => {
             <Grid className={classes.root} container direction="row"
                 justify="space-evenly">
                 <Grid item xs={2} sm={2}>
-                    <Map />
+                    <motion.div initial="hidden" animate="visible" variants={item}>
+                        <Map />
+                    </motion.div>
                 </Grid>
                 <Grid item xs={2} sm={2} >
-                    <ListAstro mapAstro={mapAstro} />
+                    <motion.div initial="hidden" animate="visible" variants={item}>
+                        <ListAstro mapAstro={mapAstro} />
+                    </motion.div>
                 </Grid>
             </Grid>
         </>

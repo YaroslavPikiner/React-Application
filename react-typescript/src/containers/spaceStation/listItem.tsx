@@ -31,9 +31,8 @@ const Astro: React.FC<Prop> = ({ item }) => {
         <>
             <ListItem key={`item-${item.name}`} className={classes.root}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                <ListItemText primary={`Item ${item.name}`} />
+                <ListItemText primary={item.name}/>
             </ListItem>
-
         </>
     )
 }

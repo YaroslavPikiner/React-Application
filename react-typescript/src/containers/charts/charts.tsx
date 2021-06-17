@@ -77,8 +77,8 @@ const Charts: React.FC<Prop> = () => {
             labels: [...data.labels, lengthOfChartLabel.toString()],
             data: {
                 datasets: [{
-                    data: Array.from({ length: lengthOfChartLabel + 1 }, () =>
-                        Math.floor(Math.random() * 40)),
+                    data: Array.from({ length: lengthOfChartLabel }, () =>
+                        Math.floor(Math.random() * 1120)),
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',

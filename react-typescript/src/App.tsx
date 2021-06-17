@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import {
-    BrowserRouter as Router,
-    Route,
-    Switch,
+  BrowserRouter as Router,
+  Route,
+  Switch,
 } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Todo from './containers/todo/todo';
-import { ITodo } from './containers/interfaces';
 import Counter from './containers/counter/counter';
 import Home from './containers/Home/Home';
 import Charts from './containers/charts/charts';
