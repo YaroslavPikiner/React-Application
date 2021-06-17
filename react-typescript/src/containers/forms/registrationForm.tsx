@@ -57,13 +57,13 @@ const useStyles = makeStyles((theme: Theme) =>
             width: '70ch',
         },
         textFieldPass: {
-            width: '34ch',
-            margin: theme.spacing(1),
-            marginBottom: theme.spacing(6),
+            width: '33ch',
+            margin: '0 20px 20px 20px'
 
         },
         appBar: {
             position: 'relative',
+            marginBottom: theme.spacing(6),
         },
     }),
 );
@@ -82,7 +82,6 @@ const RegForm: React.FC = () => {
     };
 
     const onSubmit = handleSubmit(data => alert(JSON.stringify(data)));
-
 
     return (
         <form className={classes.root} onSubmit={onSubmit}>
@@ -108,7 +107,7 @@ const RegForm: React.FC = () => {
                 className={classes.textField}
             />
             <Typography variant="h6">
-                {errors.lastName?.type === 'required' && "First name is required"}
+                {errors.lastName?.type === 'required' && "Last name is required"}
             </Typography>
 
 
@@ -119,22 +118,22 @@ const RegForm: React.FC = () => {
                 type="number"
                 {...register("phone", { required: true })}
             />
-            <Typography variant="h5">
-                {errors.phone?.type === 'required' && "First name is required"}
+            <Typography variant="h6">
+                {errors.phone?.type === 'required' && "Phone is required"}
             </Typography>
 
             <Grid container
                 direction="row"
                 justify="center"
                 alignItems="center" >
-                <Grid item xs={2}>
+                <Grid item >
                     <TextField
                         label="Password"
                         {...register("password", {
                             required: true,
                             minLength: {
                                 value: 8,
-                                message: "Password must have at least 8 characters",
+                                message: "Password must have at 8 characters",
                             }
                         })}
                         className={classes.textFieldPass}
@@ -145,7 +144,7 @@ const RegForm: React.FC = () => {
                     </Typography>
 
                 </Grid>
-                <Grid item xs={2}>
+                <Grid item>
                     <TextField
                         label="Repeat Pass"
                         {...register("repPassword", {

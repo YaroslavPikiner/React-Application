@@ -1,18 +1,41 @@
+import React from 'react';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Avatar from '@material-ui/core/Avatar';
+import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 
 
-const ListItem = () => {
+type Prop = {
+    item: {
+        name: string,
+        iss: string
+    }
+}
 
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        root: {
+            width: '100%',
+            maxWidth: 360,
+            backgroundColor: theme.palette.background.paper,
+            position: 'relative',
+            overflow: 'auto',
+            maxHeight: 300,
+        },
+    }),
+);
+
+const Astro: React.FC<Prop> = ({ item }) => {
+    const classes = useStyles()
     return (
         <>
-           <ul>
-               <li>13123</li>
-               <li>asd</li>
-               <li>asd</li>
-               <li>asd</li>
-           </ul>
-         
+            <ListItem key={`item-${item.name}`} className={classes.root}>
+                <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                <ListItemText primary={`Item ${item.name}`} />
+            </ListItem>
+
         </>
     )
 }
 
-export default ListItem
+export default Astro

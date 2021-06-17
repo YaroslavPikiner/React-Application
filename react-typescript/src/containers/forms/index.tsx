@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const Forms: React.FC = () => {
-    const [valTabs, setValTabs] = useState(2);
+    const [valTabs, setValTabs] = useState(1);
     const classes = useStyles();
 
     const handleChange = (event: any, newValue: any) => {
@@ -85,7 +85,7 @@ const Forms: React.FC = () => {
                     <RegForm />
                 </TabPanel>
                 <TabPanel value={valTabs} index={2}>
-                   <OrderForm/>
+                    <OrderForm />
                 </TabPanel>
             </div>
 

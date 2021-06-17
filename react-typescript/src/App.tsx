@@ -1,8 +1,8 @@
-import React, { useState, useRef, useContext, createContext, useReducer } from 'react';
+import React, { useState } from 'react';
 import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
+    BrowserRouter as Router,
+    Route,
+    Switch,
 } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Todo from './containers/todo/todo';
