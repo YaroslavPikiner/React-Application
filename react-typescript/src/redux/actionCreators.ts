@@ -5,11 +5,9 @@ export interface INewArticleAction {
   type: string,
   payload: IArticle
 }
-
 export interface INewCounter {
   type: string,
 }
-
 
 export interface INewTodo {
   type: string,
@@ -54,6 +52,13 @@ export const addTodo: ActionCreator<INewTodo> = (payload: ITodo) => {
 export const removeTodo = (payload: number) => {
   return {
     type: actionTypes.REMOVE_TODO,
+    payload
+  }
+}
+
+export const onMarkTodo = (payload: number) => {
+  return {
+    type: actionTypes.ON_MARK_TODO,
     payload
   }
 }

@@ -9,7 +9,6 @@ import { IArticle } from "../../type";
 import { IAppState } from "../../redux/reducers/rootReducer";
 
 
-
 const MainArticle: React.FC = () => {
     const articles: readonly IArticle[] = useSelector(
         (state: IAppState) => state.articleReducer.articles,

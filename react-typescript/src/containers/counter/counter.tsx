@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import { useSelector, shallowEqual, useDispatch } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { incrementCount, decrementCount } from "../../redux/actionCreators";
 import { Dispatch } from "redux"
-import { CounterState } from '../../type';
 import { IAppState } from '../../redux/reducers/rootReducer';
 
 
@@ -25,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const Counter: React.FC = () => {
     const classes = useStyles();
 
-    const dispatch: Dispatch = useDispatch()
+    const dispatch: Dispatch<any> = useDispatch()
     const count = useSelector(
         (state: IAppState) => state.counterReducer.counter,
     )

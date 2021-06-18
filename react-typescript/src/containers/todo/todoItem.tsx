@@ -15,13 +15,13 @@ const TodoItem: React.FC<ItemTodo> = ({ item, deleteHandle, onMarkDone }) => {
             <li style={{ padding: '20px' }} className={item.isCompleted ? "collection-item underscore  indigo lighten-4" : "collection-item"}>
                 <a style={{ margin: '20px' }} className="primary-content">
                     <button className='btn btn-primary'>
-                        <i onClick={() => onMarkDone(item.id)} className="material-icons">check</i>
+                        <i onClick={() => onMarkDone(item)} className="material-icons">check</i>
                     </button>
                 </a>
                 {item.title}
                 <a className="secondary-content ">
                     <button className='btn btn-primary '>
-                        <i onClick={() => deleteHandle(item.id)} className="material-icons">delete</i>
+                        <i onClick={() => deleteHandle(item)} className="material-icons">delete</i>
                     </button>
                 </a>
             </li>

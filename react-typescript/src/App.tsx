@@ -12,40 +12,8 @@ import Charts from './containers/charts/charts';
 import Forms from './containers/forms';
 import MainArticle from './containers/articles/index';
 import SpaceStation from './containers/spaceStation/index';
-import { ITodo } from './type';
 
 const App: React.FC = () => {
-  const [inputTitle, setInputTitle] = useState<string>('')
-  const [todos, setTodos] = useState<ITodo[]>([]);
-
-  const changeHandler = (event: string) => {
-    setInputTitle(event);
-  }
-
-  const addHandler = (title: string) => {
-    const newTodo: ITodo = {
-      id: Date.now(),
-      title: inputTitle,
-      isCompleted: false,
-    }
-    setTodos(prev => [newTodo, ...prev])
-    setInputTitle('')
-  }
-
-
-  const deleteHandle = (id: number) => {
-    const newList = todos.filter(item => item.id !== id)
-    setTodos(newList);
-  }
-
-
-  const onMarkDone = (id: number) => {
-    const newTodos = [...todos];
-    newTodos.map(item => {
-      return item.id === id ? item.isCompleted = !item.isCompleted : null
-    })
-    setTodos(newTodos)
-  }
 
   return (
     <>
@@ -56,13 +24,7 @@ const App: React.FC = () => {
             <Home />
           </Route>
           <Route path='/todo'>
-            <Todo deleteHandle={deleteHandle}
-              inputTitle={inputTitle}
-              changeHandler={changeHandler}
-              addHandler={addHandler}
-              onMarkDone={onMarkDone}
-              todos={todos}
-            />
+            <Todo />
           </Route>
           <Route path='/counter' component={Counter} />
           <Route path='/charts' component={Charts} />

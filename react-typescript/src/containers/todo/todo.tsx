@@ -1,25 +1,52 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { ITodo } from '../../type'
 import TodoForm from './todoForm'
 import TodoList from './todoList'
+import { addTodo, onMarkTodo, removeTodo } from "../../redux/actionCreators";
+import { Dispatch } from "redux"
+import { IAppState } from "../../redux/reducers/rootReducer";
+import { useSelector, useDispatch } from 'react-redux';
 
-interface TodoProps {
-    inputTitle: string
-    changeHandler: (event: string) => void
-    addHandler: (title: string) => void
-    todos: ITodo[]
-    deleteHandle: (item: number) => void
-    onMarkDone: (id: number) => void
-}
+const Todo: React.FC = () => {
+    const [inputTitle, setInputTitle] = useState<string>('')
+    const todos: ITodo[] = useSelector((state: IAppState) => state.todoReducer.todos)
+    const dispatch: Dispatch<any> = useDispatch()
+
+    const changeHandler = (event: string) => {
+
+        setInputTitle(event);
+    }
+
+    const addHandler = (title: string) => {
+        const newTodo: ITodo = {
+            id: Date.now(),
+            title: inputTitle,
+            isCompleted: false,
+        }
+        dispatch(addTodo(newTodo))
+        setInputTitle('')
+    }
 
 
-const Todo: React.FC<TodoProps> = ({ inputTitle, changeHandler, addHandler, todos, deleteHandle, onMarkDone }) => {
+    const deleteHandle = (id: number) => {
+        console.log(id);
+        return dispatch(removeTodo(id));
+    }
+
+    const onMarkDone = (id: number) => {
+        // const newTodos = [...todos];
+        // newTodos.map(item => {
+        //   return item.id === id ? item.isCompleted = !item.isCompleted : null
+        // })
+        // setTodos(newTodos)
+        return dispatch(onMarkTodo(id));
+    }
 
     return (
         <>
             <div className="container">
                 <TodoForm inputTitle={inputTitle} addHandler={addHandler} changeHandler={changeHandler} />
-                <TodoList todos={todos} deleteHandle={deleteHandle} onMarkDone={onMarkDone}/>
+                <TodoList todos={todos} deleteHandle={deleteHandle} onMarkDone={onMarkDone} />
             </div>
         </>
     )
