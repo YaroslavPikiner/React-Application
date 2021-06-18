@@ -28,8 +28,6 @@ const Counter: React.FC = () => {
         (state: IAppState) => state.counterReducer.counter,
     )
 
-    console.log(dispatch);
-
     const inc = () => {
         dispatch(incrementCount())
     }

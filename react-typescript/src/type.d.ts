@@ -11,8 +11,24 @@ export type ITodo = {
   isCompleted: boolean
 }
 
+export type ITimer = {
+  time: {
+    h: number
+    m: number
+    s: number
+  }
+  seconds: number
+  laps: []
+}
+
+export type ITimeCurr = number
+
 export type TodoState = {
   todos: ITodo[]
+}
+
+export type ChartState = {
+  chart: IChart
 }
 
 export type ArticleState = {
@@ -23,31 +39,6 @@ export type CounterState = {
   counter: ICounter
 }
 
-export interface IChart {
-  id?: string;
-  className?: string;
-  height?: number;
-  width?: number;
-  redraw?: boolean;
-  type: string;
-  data: {
-    labels: string[],
-    datasets: IDatasets,
-    options: {
-      scales: {
-        y: {
-          beginAtZero: boolean
-        }
-      }
-    }
-  }
-}
 
-// interface IDatasets {
-//   label: string;
-//   data: number[];
-//   backgroundColor: string[];
-//   borderColor: string[];
-//   borderWidth: number;
-// }
+
 
