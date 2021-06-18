@@ -50,7 +50,6 @@ const Article: React.FC<Props> = ({ article, removeArticle }) => {
         (article: IArticle) => dispatch(removeArticle(article)),
         [dispatch, removeArticle]
     )
-
     return (
         <motion.div initial="hidden" animate="visible" variants={item}>
             <Card className={classes.root}>

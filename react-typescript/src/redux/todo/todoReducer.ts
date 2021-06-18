@@ -1,8 +1,7 @@
 import { Reducer } from 'react';
 import { ITodo, TodoState } from '../../type';
-import { INewTodo } from "../actionCreators";
+import { INewTodo } from "./todoACreators";
 import * as actionTypes from '../actionTypes';
-
 
 const initState: TodoState = {
     todos: [

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { ITodo } from '../../type'
 import TodoForm from './todoForm'
 import TodoList from './todoList'
-import { addTodo, onMarkTodo, removeTodo } from "../../redux/actionCreators";
+import { addTodo, onMarkTodo, removeTodo } from "../../redux/todo/todoACreators";
 import { Dispatch } from "redux"
 import { IAppState } from "../../redux/reducers/rootReducer";
 import { useSelector, useDispatch } from 'react-redux';
@@ -13,7 +13,6 @@ const Todo: React.FC = () => {
     const dispatch: Dispatch<any> = useDispatch()
 
     const changeHandler = (event: string) => {
-
         setInputTitle(event);
     }
 
@@ -27,18 +26,12 @@ const Todo: React.FC = () => {
         setInputTitle('')
     }
 
-
     const deleteHandle = (id: number) => {
         console.log(id);
         return dispatch(removeTodo(id));
     }
 
     const onMarkDone = (id: number) => {
-        // const newTodos = [...todos];
-        // newTodos.map(item => {
-        //   return item.id === id ? item.isCompleted = !item.isCompleted : null
-        // })
-        // setTodos(newTodos)
         return dispatch(onMarkTodo(id));
     }
 
@@ -51,6 +44,5 @@ const Todo: React.FC = () => {
         </>
     )
 }
-
 
 export default Todo;

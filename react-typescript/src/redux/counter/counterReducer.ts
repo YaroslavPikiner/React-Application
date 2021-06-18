@@ -1,7 +1,7 @@
 import { CounterState } from "../../type"
 import * as actionTypes from "../actionTypes"
-import { Action, Reducer } from 'redux'
-import { INewCounter } from "../actionCreators"
+import { Reducer } from 'redux'
+import { INewCounter } from "./counterACreator"
 
 const initCount: CounterState = {
     counter: 0

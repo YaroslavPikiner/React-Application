@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
-import Paper from '@material-ui/core/Paper';
+import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { useSelector, useDispatch } from "react-redux"
-import { incrementCount, decrementCount } from "../../redux/actionCreators";
+import { incrementCount, decrementCount } from "../../redux/counter/counterACreator";
 import { Dispatch } from "redux"
 import { IAppState } from '../../redux/reducers/rootReducer';
 

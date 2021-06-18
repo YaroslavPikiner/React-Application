@@ -1,8 +1,7 @@
 import { ArticleState, IArticle } from "../../type"
-import { Action } from 'redux';
 import { Reducer } from "react";
 import * as actionTypes from "../actionTypes"
-import { INewArticleAction } from "../actionCreators";
+import { INewArticleAction } from "./articleCreators";
 
 const initialArticleState: ArticleState = {
     articles: [
