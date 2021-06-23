@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import BookItem from './bookItem';
+import BookItem from '../bookItem/bookItem';
 import Box from '@material-ui/core/Box';
-import { StoreCard } from '../../../type';
+import { StoreCard } from '../../../../type';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';

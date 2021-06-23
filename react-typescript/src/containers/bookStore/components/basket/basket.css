@@ -1,0 +1,23 @@
+.basket {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.basket__wrapper {
+	width: 100%;
+}
+
+.basket__list {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: start;
+}
+
+
+
+.btn__back {
+    display: flex;
+    justify-content: center;
+}

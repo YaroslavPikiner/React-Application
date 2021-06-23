@@ -1,20 +1,3 @@
-.basket {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.basket__wrapper {
-	width: 100%;
-}
-
-.basket__list {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: start;
-}
-
 .basket__item {
 	display: flex;
 	justify-content: space-between;
@@ -23,12 +6,13 @@
     background-color: rgb(255, 255, 255);
     padding: 20px 50px;
     border-radius: 25px;
+    margin-bottom: 30px;
 }
 
 .basket__image {
 	margin: 0 50px;
-    max-width: 400px;
-    max-height: 400px;
+    max-width: 200px;
+    max-height: 200px;
 }
 
 .basket__item__description {
@@ -72,4 +56,3 @@
     background-color: rgb(212, 71, 71);
     color: white;
 }
-

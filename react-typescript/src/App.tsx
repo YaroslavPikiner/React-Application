@@ -13,9 +13,9 @@ import Forms from './containers/forms';
 import MainArticle from './containers/articles/index';
 import SpaceStation from './containers/spaceStation/index';
 import BookStore from './containers/bookStore/index';
-import BookCard from './containers/bookStore/components/bookCard';
+import BookCard from './containers/bookStore/components/bookCard/bookCard';
 import OrderForm from './containers/forms/OrderForm/orderForm';
-import Basket from './containers/bookStore/components/basket';
+import Basket from './containers/bookStore/components/basket/basket';
 
 
 const App: React.FC = () => {

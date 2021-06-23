@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Typography } from '@material-ui/core';
 import { StoreCard } from '../../type';
-import BookList from './components/booklist';
-import Basket from './components/basket';
+import BookList from './components/bookList/booklist';
+import Basket from './components/basket/basket';
 import Button from '@material-ui/core/Button';
 import Toolbar from '@material-ui/core/Toolbar';
 import AppBar from '@material-ui/core/AppBar';
