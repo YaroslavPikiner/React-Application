@@ -1,58 +1,145 @@
 import React, { useState } from "react";
 import { StoreCard } from '../../../type';
 import { useHistory } from "react-router-dom";
+import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 import '../index.css';
+import { Theme, withStyles, createStyles, makeStyles } from '@material-ui/core/styles';
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+import { Badge } from "@material-ui/core";
+import { Link } from 'react-router-dom'
 
 type Prop = {
     item: StoreCard
 }
 
-const Button: React.FC<Prop> = ({ item }) => {
+
+const useStyles = makeStyles((theme: Theme) => ({
+    icon: {
+        marginRight: theme.spacing(2),
+    },
+    heroContent: {
+        backgroundColor: theme.palette.background.paper,
+        padding: theme.spacing(8, 0, 6),
+    },
+    heroButtons: {
+        marginTop: theme.spacing(4),
+    },
+    cardGrid: {
+        paddingTop: theme.spacing(8),
+        paddingBottom: theme.spacing(8),
+    },
+    card: {
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+    },
+    cardMedia: {
+        width: 600,
+        height: 300// 16:9
+    },
+    cardContent: {
+        flexGrow: 1,
+    },
+    footer: {
+        backgroundColor: theme.palette.background.paper,
+        padding: theme.spacing(6),
+    },
+    container: {
+        display: 'flex',
+        alignItems: 'center',
+        height: '100 %',
+        justifyContent: 'center',
+        flexWrap: 'wrap'
+    },
+}));
+
+const BookItem: React.FC<Prop> = ({ item }) => {
+    const [open, setOpen] = useState<boolean>(false);
+
+    const classes = useStyles();
+
     let history = useHistory();
     const pushToCurrBook = (id: string | number) => {
         history.push(`/books/:${id}`);
     }
 
-    return (
-        <button className="button button-primary" onClick={() => pushToCurrBook(item.id)}>
-            <i className="fa fa-chevron-right"></i> Подробнее
-        </button>
-    )
-}
+    const toBacket = (id: string | number) => {
+        console.log(id);
+    }
 
-const CardHeader: React.FC<Prop> = ({ item }) => {
-    return (
-        <header className="card-header" >
-            <h4 className="card-header--title">{item.author}</h4>
-        </header>
-    )
-}
+    const handleClick = (id: number | string) => {
+        toBacket(id)
+        setOpen(true)
+    }
 
+    const handleClose = (event: React.SyntheticEvent | React.MouseEvent, reason?: string) => {
+        if (reason === 'clickaway') {
+            return;
+        }
 
-const CardBody: React.FC<Prop> = ({ item }) => {
-    return (
-        <div className="card-body">
-            <p className="date">March 20 2015</p>
-
-            <h2>{item.title}</h2>
-
-            <p className="body-content">{item.description}</p>
-            <Button item={item} />
-        </div>
-    )
-}
-
-const BookItem: React.FC<Prop> = ({ item }) => {
+        setOpen(false);
+    };
 
     return (
         <>
-            <div className="app-card-list" >
-                <article className="card" >
-                    <CardHeader item={item} />
-                    <img src={item.img} alt={item.title} />
-                    <CardBody item={item} />
-                </article>
-            </div>
+            <Grid item xs={6} sm={6} md={6}>
+                <Card className={classes.card}>
+                    {item.img ? <CardMedia
+                        className={classes.cardMedia}
+                        image={item.img}
+                        title={item.name}
+                    /> : <p>Loading...</p>}
+                    <CardContent className={classes.cardContent}>
+                        <Typography gutterBottom variant="h3" component="h4" >
+                            {item.title}
+                        </Typography>
+                        <Typography gutterBottom variant="h5" component="h2" color="textSecondary">
+                            {item.author}
+                        </Typography>
+                        <Typography>
+                            {item.description}
+                        </Typography>
+                    </CardContent>
+                    <CardActions>
+                        <Button size="small" color="primary" onClick={() => pushToCurrBook(item.id)}>
+                            Подробнее
+                        </Button>
+                        <Button size="small" color="primary" onClick={() => handleClick(item.id)}>
+                            В корзину
+                        </Button>
+                    </CardActions>
+                </Card>
+            </Grid>
+            <Snackbar
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                }}
+                open={open}
+                autoHideDuration={6000}
+                onClose={handleClose}
+                message="Added to backet"
+                action={
+                    <React.Fragment>
+                        <Button color="secondary" size="small" onClick={handleClose}>
+                            <Link to='/backet'>
+                                To Backet
+                            </Link>
+                        </Button>
+                        <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
+                            <CloseIcon fontSize="small" />
+                        </IconButton>
+                    </React.Fragment>
+                }
+            />
         </>
     );
 }

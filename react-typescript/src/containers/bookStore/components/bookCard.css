@@ -1,7 +1,6 @@
 .wrapper {
-	width: 750px;
+	width: 850px;
 	height: 380px;
-	background-color: white;
   margin: 0 auto;
 }
 
@@ -12,6 +11,12 @@
 	align-items: flex-start;
 	background-color: antiquewhite;
 
+}
+
+
+.card__counter {
+  display: flex;
+  margin: 20px 0;
 }
 
 .card__image {
@@ -37,4 +42,8 @@
 
 .inStock-failed {
   color: rgb(199, 50, 50);
+}
+
+.counter {
+  margin: 0 10px;
 }

@@ -1,12 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useHistory } from "react-router-dom";
+import { useLocation, useHistory, Link } from "react-router-dom";
 import './bookCard.css'
 import Button from '@material-ui/core/Button';
-import { StoreCard } from '../../../type';
+import { Typography } from '@material-ui/core';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import AddIcon from '@material-ui/icons/Add';
+import RemoveIcon from '@material-ui/icons/Remove';
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+
 
 const BookCard: React.FC = () => {
     const [book, setBook] = useState<any>({});
     const [count, setCount] = useState<number>(0);
+    const [isDisableAdd, setIsDisableAdd] = useState<boolean>(false);
+    const [isDisableRemove, setIsDisableRemove] = useState<boolean>(true);
+    const [open, setOpen] = useState<boolean>(false);
+
     let history = useHistory();
     let loc = useLocation();
 
@@ -19,35 +31,52 @@ const BookCard: React.FC = () => {
 
     }, []);
 
-    console.log(book);
+    const handleClick = () => {
+        setOpen(true)
+    }
+
+    const handleClose = (event: React.SyntheticEvent | React.MouseEvent, reason?: string) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+    };
 
     const back = () => {
         history.push('/books')
     }
 
-
     const removeToBackedHandle = () => {
+        if (count === 1) {
+            setIsDisableRemove(true)
+        }
+        setIsDisableAdd(false)
         setBook({
             ...book, amountInStock: book.amountInStock + 1
         })
         setCount(count - 1)
-        
     }
-
 
     const addToBacketHandle = () => {
-        setBook({
-            ...book, amountInStock: book.amountInStock - 1
-        })
-        setCount(count + 1)
+        if (count > 19) {
+            setIsDisableAdd(true)
+        } else {
+            setIsDisableRemove(false)
+            setBook({
+                ...book, amountInStock: book.amountInStock - 1
+            })
+            setCount(count + 1)
+        }
     }
+
 
 
     return (
         <>
             <div className="wrapper">
                 <div className="card__appbar">
-                    <Button onClick={back} variant="outlined" size="medium" color="primary" >Back to product</Button>
+                    <Button onClick={back} variant="contained" size="medium" color="primary" > <ArrowBackIcon />Back to product</Button>
                 </div>
                 <div className="card">
                     <div className="card__image">
@@ -61,16 +90,38 @@ const BookCard: React.FC = () => {
                         </div>
                         <p className="description">{book.description}</p>
                         <div className="card__btns">
-                            <Button variant="outlined" size="medium" color="primary" >Buy</Button>
-                            <Button variant="outlined" size="medium" color="primary" >Add to basket</Button>
+                            <Button variant="contained" size="medium" color="primary" > <ShoppingCartIcon /><Link to={`/order`}>Buy now</Link></Button>
+                            <Button variant="contained" size="medium" color="primary" onClick={handleClick}>Add to basket</Button>
                             <div className="card__counter">
-                                <Button onClick={addToBacketHandle} variant="outlined" size="medium" color="primary" >+</Button>
-                                <span>{count}</span>
-                                <Button onClick={removeToBackedHandle} variant="outlined" size="medium" color="primary" >-</Button>
+                                <Button onClick={addToBacketHandle} variant="contained" size="small" color="primary" disabled={isDisableAdd} ><AddIcon /></Button>
+                                <Typography gutterBottom variant="h5" component="h2">{count}</Typography>
+                                <Button onClick={removeToBackedHandle} variant="contained" size="small" color="secondary" disabled={isDisableRemove} ><RemoveIcon /></Button>
                             </div>
                         </div>
                     </div>
                 </div>
+                <Snackbar
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'left',
+                    }}
+                    open={open}
+                    autoHideDuration={6000}
+                    onClose={handleClose}
+                    message="Added to backet"
+                    action={
+                        <React.Fragment>
+                            <Button color="secondary" size="small" onClick={handleClose}>
+                                <Link to='/order'>
+                                To order
+                                </Link>
+                            </Button>
+                            <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
+                                <CloseIcon fontSize="small" />
+                            </IconButton>
+                        </React.Fragment>
+                    }
+                />
             </div>
         </>
     )

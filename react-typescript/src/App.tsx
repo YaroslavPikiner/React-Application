@@ -14,6 +14,8 @@ import MainArticle from './containers/articles/index';
 import SpaceStation from './containers/spaceStation/index';
 import BookStore from './containers/bookStore/index';
 import BookCard from './containers/bookStore/components/bookCard';
+import OrderForm from './containers/forms/OrderForm/orderForm';
+import Basket from './containers/bookStore/components/basket';
 
 
 const App: React.FC = () => {
@@ -35,7 +37,9 @@ const App: React.FC = () => {
           <Route path='/articles' component={MainArticle} />
           <Route path='/space' component={SpaceStation} />
           <Route exact path='/books' component={BookStore} />
-          <Route exact path='/books/:id' component={BookCard} />
+          <Route path='/books/:id' component={BookCard} />
+          <Route path='/backet' component={Basket} />
+          <Route path='/order' component={OrderForm} />
         </Switch>
       </Router>
 

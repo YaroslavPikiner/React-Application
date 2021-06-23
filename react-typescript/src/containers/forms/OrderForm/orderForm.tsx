@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import AddressForm from './AddressForm';
 import PaymentForm from './PaymentForm';
 import Review from './Review';
+import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -85,6 +86,14 @@ const OrderForm: React.FC = () => {
                     <Typography variant="h6" color="inherit" noWrap>
                         Company name
                     </Typography>
+                    <Button variant="contained"
+                        color="primary">
+                        <Link to="/books">
+                            <Typography variant="h6" color="inherit" noWrap>
+                                Back
+                            </Typography>
+                        </Link>
+                    </Button>
                 </Toolbar>
             </AppBar>
             <main className={classes.layout}>
