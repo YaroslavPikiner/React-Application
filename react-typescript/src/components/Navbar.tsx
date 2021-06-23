@@ -61,8 +61,8 @@ const Navbar: React.FC = () => {
                         </li>
                         <li>
                             <a href="#">
-                                <Link to='/timer' className='logo'>
-                                    Timer
+                                <Link to='/books' className='logo'>
+                                    Book Store
                                 </Link>
                             </a>
                         </li>

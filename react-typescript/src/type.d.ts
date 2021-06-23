@@ -11,18 +11,6 @@ export type ITodo = {
   isCompleted: boolean
 }
 
-export type ITimer = {
-  time: {
-    h: number
-    m: number
-    s: number
-  }
-  seconds: number
-  laps: []
-}
-
-export type ITimeCurr = number
-
 export type TodoState = {
   todos: ITodo[]
 }
@@ -39,6 +27,22 @@ export type CounterState = {
   counter: ICounter
 }
 
+export type StoreCard = {
+  id: number | string;
+  name?: stirng;
+  avatar?: string;
+  createdAt?: string;
+  title: string;
+  description: string;
+  author: string;
+  date: string | number;
+  price: string | number;
+  amountInStock: number;
+  inStock: boolean;
+  bestseller: boolean;
+  img: string;
+}
 
-
-
+export type Basket = {
+  offers: []
+}

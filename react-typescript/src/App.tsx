@@ -12,7 +12,9 @@ import Charts from './containers/charts/charts';
 import Forms from './containers/forms';
 import MainArticle from './containers/articles/index';
 import SpaceStation from './containers/spaceStation/index';
-import Timer from './containers/timer/index';
+import BookStore from './containers/bookStore/index';
+import BookCard from './containers/bookStore/components/bookCard';
+
 
 const App: React.FC = () => {
 
@@ -32,7 +34,8 @@ const App: React.FC = () => {
           <Route path='/forms' component={Forms} />
           <Route path='/articles' component={MainArticle} />
           <Route path='/space' component={SpaceStation} />
-          <Route path='/timer' component={Timer} />
+          <Route exact path='/books' component={BookStore} />
+          <Route exact path='/books/:id' component={BookCard} />
         </Switch>
       </Router>
 
