@@ -4,15 +4,15 @@ import Button from '@material-ui/core/Button';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Link } from 'react-router-dom';
 import BasketItem from '../backetItem/basketItem';
-
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import { useDispatch, useSelector } from 'react-redux';
+import { IAppState } from '../../../../redux/reducers/rootReducer';
 import './basket.css';
 
-type Prop = {
-    booksStore: StoreCard[];
-}
+const Basket: React.FC = () => {
+    const basketStore = useSelector((state: IAppState) => state.bookStoreReducer.offers)
 
-
-const Basket: React.FC<Prop> = ({ booksStore }) => {
+    const totalPrice = basketStore.reduce((a, b) => a.price + b.price)
 
     return (
         <>
@@ -25,10 +25,20 @@ const Basket: React.FC<Prop> = ({ booksStore }) => {
                 <div className="basket">
                     <ul className="basket__list">
                         <li className='basket__item--wrapper'>
-                           <BasketItem/>
-                           
+                            {
+                                basketStore.length ?
+                                    basketStore.map((item: any) => {
+                                        return <BasketItem key={item.id} item={item} />;
+                                    })
+                                    : <p>Loading...</p>
+
+                            }
                         </li>
                     </ul>
+                    <div className="backet__price">
+                        <p> Total Price: {totalPrice}</p>
+                        <Button variant="contained" size="medium" color="primary" > <ShoppingCartIcon /><Link to={`/order`}>Buy now</Link></Button>
+                    </div>
                 </div>
 
             </div>

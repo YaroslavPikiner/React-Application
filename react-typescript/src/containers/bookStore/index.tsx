@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { Typography } from '@material-ui/core';
-import { StoreCard } from '../../type';
 import BookList from './components/bookList/booklist';
-import Basket from './components/basket/basket';
-import Button from '@material-ui/core/Button';
 import Toolbar from '@material-ui/core/Toolbar';
 import AppBar from '@material-ui/core/AppBar';
 import Badge from '@material-ui/core/Badge';
 import { Theme, withStyles, createStyles, makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { loadNotes } from '../../redux/bookStore/bookStoreACreator';
+import { useDispatch, useSelector } from 'react-redux';
+import { IAppState } from '../../redux/reducers/rootReducer';
+import { Dispatch } from "redux"
+
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -18,6 +20,10 @@ const useStyles = makeStyles((theme: Theme) =>
       position: 'relative',
       marginBottom: theme.spacing(6),
     },
+    toolBar: {
+      display: 'flex',
+      justifyContent: 'space-around'
+    }
   }),
 );
 
@@ -35,31 +41,33 @@ const StyledBadge = withStyles((theme: Theme) =>
 
 const BookStore: React.FC = () => {
   const classes = useStyles();
-  const [booksStore, setBooksStore] = useState([])
+  const booksStore = useSelector((state: IAppState) => state.bookStoreReducer.storeCards)
+  const basketStore = useSelector((state: IAppState) => state.bookStoreReducer.offers)
+
+  const dispatch: Dispatch<any> = useDispatch()
   useEffect(() => {
-    fetch('https://5e4d442f9b6805001438fc21.mockapi.io/books/v1/cards/')
-      .then(res => res.json())
-      .then(res => setBooksStore(res.books))
+    dispatch(loadNotes())
   }, [])
 
   return (
     <>
       <AppBar position="absolute" color="default" className={classes.appBar}>
-        <Toolbar>
+        <Toolbar className={classes.toolBar}>
           <Typography variant="h6" color="inherit" noWrap>
             Book Store
           </Typography>
           <Link to="/backet">
-            <IconButton aria-label="cart">
-              <StyledBadge badgeContent={4} color="secondary">
+            <IconButton edge="end" aria-label="cart">
+              <StyledBadge badgeContent={basketStore.length} color="secondary">
                 <ShoppingCartIcon />
               </StyledBadge>
             </IconButton>
           </Link>
         </Toolbar>
-
       </AppBar>
-      <BookList booksStore={booksStore} />
+      {
+        booksStore.length ? <BookList booksStore={booksStore} /> : null
+      }
     </>
   )
 }

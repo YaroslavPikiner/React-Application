@@ -1,11 +1,14 @@
 .basket {
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	padding: 30px;
 }
 
 .basket__wrapper {
 	width: 100%;
+	padding: 20px;
 }
 
 .basket__list {
@@ -13,9 +16,9 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: start;
+	margin: 20px;
+	padding: 20px 0px;
 }
-
-
 
 .btn__back {
     display: flex;

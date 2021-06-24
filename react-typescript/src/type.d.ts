@@ -27,6 +27,7 @@ export type CounterState = {
   counter: ICounter
 }
 
+
 export type StoreCard = {
   id: number | string;
   name?: stirng;
@@ -44,5 +45,10 @@ export type StoreCard = {
 }
 
 export type Basket = {
-  offers: []
+  offers: StoreCard[]
+}
+
+export type StoreCardState = {
+  storeCards: StoreCard[],
+  offers: Basket[]
 }

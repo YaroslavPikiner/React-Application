@@ -15,6 +15,8 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import { Badge } from "@material-ui/core";
 import { Link } from 'react-router-dom'
+import { useDispatch } from "react-redux";
+import { AddCardToBasket } from '../../../../redux/bookStore/bookStoreACreator';
 
 type Prop = {
     item: StoreCard
@@ -63,7 +65,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const BookItem: React.FC<Prop> = ({ item }) => {
     const [open, setOpen] = useState<boolean>(false);
-
+    const dispatch = useDispatch()
     const classes = useStyles();
 
     let history = useHistory();
@@ -71,12 +73,8 @@ const BookItem: React.FC<Prop> = ({ item }) => {
         history.push(`/books/:${id}`);
     }
 
-    const toBacket = (id: string | number) => {
-        console.log(id);
-    }
-
-    const handleClick = (id: number | string) => {
-        toBacket(id)
+    const handleClick = (item: StoreCard) => {
+        dispatch(AddCardToBasket(item))
         setOpen(true)
     }
 
@@ -112,7 +110,7 @@ const BookItem: React.FC<Prop> = ({ item }) => {
                         <Button size="small" color="primary" onClick={() => pushToCurrBook(item.id)}>
                             Подробнее
                         </Button>
-                        <Button size="small" color="primary" onClick={() => handleClick(item.id)}>
+                        <Button size="small" color="primary" onClick={() => handleClick(item)}>
                             В корзину
                         </Button>
                     </CardActions>
