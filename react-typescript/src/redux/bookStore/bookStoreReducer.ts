@@ -22,6 +22,12 @@ const bookStoreReducer: Reducer<StoreCardState, IAny> = (state = initStoreCard, 
                 ...state,
                 offers: [...state.offers, action.payload],
             }
+        case actionTypes.REMOVE_FROM_BASKET:
+            const updatedBasket: any = state.offers.filter((item: any) => item.id !== action.payload)
+            return {
+                ...state,
+                offers: updatedBasket,
+            }
         default:
             return state
     }

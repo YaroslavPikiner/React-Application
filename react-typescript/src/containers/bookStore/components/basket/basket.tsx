@@ -7,12 +7,13 @@ import BasketItem from '../backetItem/basketItem';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { useDispatch, useSelector } from 'react-redux';
 import { IAppState } from '../../../../redux/reducers/rootReducer';
+import Loader from "react-loader-spinner";
 import './basket.css';
 
 const Basket: React.FC = () => {
     const basketStore = useSelector((state: IAppState) => state.bookStoreReducer.offers)
+    const basketPrice = basketStore.map((item: any) => item.price)
 
-    const totalPrice = basketStore.reduce((a, b) => a.price + b.price)
 
     return (
         <>
@@ -26,17 +27,22 @@ const Basket: React.FC = () => {
                     <ul className="basket__list">
                         <li className='basket__item--wrapper'>
                             {
-                                basketStore.length ?
-                                    basketStore.map((item: any) => {
-                                        return <BasketItem key={item.id} item={item} />;
-                                    })
-                                    : <p>Loading...</p>
-
+                                basketStore ?
+                                    basketStore.map((item: any) => item ? <BasketItem key={item.id} item={item} /> : <p>Basket is empty</p>)
+                                    : <Loader
+                                        type="Bars"
+                                        color="#00BFFF"
+                                        height={100}
+                                        width={100}
+                                        timeout={3000} //3 secs
+                                    />
                             }
                         </li>
                     </ul>
                     <div className="backet__price">
-                        <p> Total Price: {totalPrice}</p>
+                        <p> Total Price: ${basketPrice ? basketPrice.reduce((prev, curr) => {
+                            return prev + curr
+                        },0) : 0}</p>
                         <Button variant="contained" size="medium" color="primary" > <ShoppingCartIcon /><Link to={`/order`}>Buy now</Link></Button>
                     </div>
                 </div>

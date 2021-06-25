@@ -9,19 +9,17 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import './index.css';
-import { Theme, withStyles, createStyles, makeStyles } from '@material-ui/core/styles';
+import { Theme, makeStyles } from '@material-ui/core/styles';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
-import { Badge } from "@material-ui/core";
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { AddCardToBasket } from '../../../../redux/bookStore/bookStoreACreator';
 
 type Prop = {
     item: StoreCard
 }
-
 
 const useStyles = makeStyles((theme: Theme) => ({
     icon: {
@@ -82,7 +80,6 @@ const BookItem: React.FC<Prop> = ({ item }) => {
         if (reason === 'clickaway') {
             return;
         }
-
         setOpen(false);
     };
 
@@ -126,7 +123,7 @@ const BookItem: React.FC<Prop> = ({ item }) => {
                 onClose={handleClose}
                 message="Added to backet"
                 action={
-                    <React.Fragment>
+                    <>
                         <Button color="secondary" size="small" onClick={handleClose}>
                             <Link to='/backet'>
                                 To Backet
@@ -135,7 +132,7 @@ const BookItem: React.FC<Prop> = ({ item }) => {
                         <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
                             <CloseIcon fontSize="small" />
                         </IconButton>
-                    </React.Fragment>
+                    </>
                 }
             />
         </>

@@ -33,9 +33,15 @@ export const LoadCards: ActionCreator<INewStoreCardAction> = (payload: BooksPayl
 
 
 export const AddCardToBasket: ActionCreator<INewBusketCardAction> = (payload: any) => {
-    console.log(payload)
     return {
         type: actionTypes.ADD_TO_BASKET,
+        payload,
+    }
+}
+
+export const removeItemFromBasket: ActionCreator<INewBusketCardAction> = (payload: any) => {
+    return {
+        type: actionTypes.REMOVE_FROM_BASKET,
         payload,
     }
 }

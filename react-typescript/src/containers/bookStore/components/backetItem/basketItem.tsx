@@ -1,25 +1,33 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { removeItemFromBasket } from '../../../../redux/bookStore/bookStoreACreator';
 import { StoreCard } from '../../../../type';
 import './backetItem.css';
-
 type Prop = {
     item: StoreCard
 }
 
-const BasketItem: React.FC<Prop> = ({item}) => {
+const BasketItem: React.FC<Prop> = ({ item }) => {
+    const dispatch = useDispatch();
+
+    const removeItem = (id: any) => {
+        dispatch(removeItemFromBasket(id));
+    }
+
     return (
-        <div className='basket__item'>
-            <img className='basket__image' src="https://i.pinimg.com/originals/77/e4/93/77e493a31ae8c9915a98852d203416d6.jpg" alt="#" />
-            <div className="basket__item__description">
-                <p className="basket__item--title">{item.title}</p>
-                <p className="basket__item--name">{item.author}</p>
+        <>
+            <div className='basket__item'>
+                <img className='basket__image' src={item.img} alt="#" />
+                <div className="basket__item__description">
+                    <p className="basket__item--title">{item.title}</p>
+                    <p className="basket__item--name">{item.author}</p>
+                </div>
+                <p className='basket__item--amount'>{item.name}</p>
+                <p className='basket__item--price'>${item.price}</p>
+                <button className='basket__item--btn' onClick={() => removeItem(item.id)}>Remove</button>
             </div>
-            <p className='basket__item--amount'>{item.name}</p>
-            <p className='basket__item--price'>${item.price}</p>
-            <button className='basket__item--btn'>Remove</button>
-        </div>
+        </>
     )
 }
-
 
 export default BasketItem
