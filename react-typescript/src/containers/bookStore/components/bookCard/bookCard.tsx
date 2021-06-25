@@ -10,6 +10,9 @@ import RemoveIcon from '@material-ui/icons/Remove';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
+import { useDispatch } from 'react-redux';
+import { AddCardToBasket } from '../../../../redux/bookStore/bookStoreACreator';
+import { StoreCard } from '../../../../type';
 
 
 const BookCard: React.FC = () => {
@@ -18,10 +21,17 @@ const BookCard: React.FC = () => {
     const [isDisableAdd, setIsDisableAdd] = useState<boolean>(false);
     const [isDisableRemove, setIsDisableRemove] = useState<boolean>(true);
     const [open, setOpen] = useState<boolean>(false);
+    const dispatch = useDispatch();
+
+ 
 
     let history = useHistory();
     let loc = useLocation();
 
+
+    const addOrder = (item: StoreCard) => {
+        dispatch(AddCardToBasket(item));
+    }
 
     useEffect(() => {
         fetch(`https://5e4d442f9b6805001438fc21.mockapi.io/books/v1/cards/${loc.pathname.slice(8)}`)
@@ -90,7 +100,7 @@ const BookCard: React.FC = () => {
                         </div>
                         <p className="description">{book.description}</p>
                         <div className="card__btns">
-                            <Button variant="contained" size="medium" color="primary" > <ShoppingCartIcon /><Link to={`/order`}>Buy now</Link></Button>
+                            <Button variant="contained" size="medium" color="primary" onClick={() => addOrder(book)}> <ShoppingCartIcon /><Link to={`/order`}>Buy now</Link></Button>
                             <Button variant="contained" size="medium" color="primary" onClick={handleClick}>Add to basket</Button>
                             <div className="card__counter">
                                 <Button onClick={addToBacketHandle} variant="contained" size="small" color="primary" disabled={isDisableAdd} ><AddIcon /></Button>
@@ -113,7 +123,7 @@ const BookCard: React.FC = () => {
                         <React.Fragment>
                             <Button color="secondary" size="small" onClick={handleClose}>
                                 <Link to='/order'>
-                                To order
+                                    To order
                                 </Link>
                             </Button>
                             <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>

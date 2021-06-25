@@ -14,7 +14,6 @@ const Basket: React.FC = () => {
     const basketStore = useSelector((state: IAppState) => state.bookStoreReducer.offers)
     const basketPrice = basketStore.map((item: any) => item.price)
 
-
     return (
         <>
             <div className='basket__wrapper'>

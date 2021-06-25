@@ -49,6 +49,10 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(3),
         marginLeft: theme.spacing(1),
     },
+    toolBar: {
+        display: 'flex',
+        justifyContent: 'space-around'
+    }
 }));
 
 const steps = ['Shipping address', 'Payment details', 'Review your order'];
@@ -82,7 +86,7 @@ const OrderForm: React.FC = () => {
         <>
             <CssBaseline />
             <AppBar position="absolute" color="default" className={classes.appBar}>
-                <Toolbar>
+                <Toolbar className={classes.toolBar}>
                     <Typography variant="h6" color="inherit" noWrap>
                         Company name
                     </Typography>
