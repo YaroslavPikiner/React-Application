@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import Paper from '@material-ui/core/Paper';
+import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import { useSelector, shallowEqual, useDispatch } from "react-redux"
-import { incrementCount, decrementCount } from "../../redux/actionCreators";
+import { useSelector, useDispatch } from "react-redux"
+import { incrementCount, decrementCount } from "../../redux/counter/counterACreator";
 import { Dispatch } from "redux"
+import { IAppState } from '../../redux/reducers/rootReducer';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -24,11 +24,9 @@ const Counter: React.FC = () => {
     const classes = useStyles();
 
     const dispatch: Dispatch<any> = useDispatch()
-    const count: any = useSelector(
-        (state: ArticleState) => state.counter,
+    const count = useSelector(
+        (state: IAppState) => state.counterReducer.counter,
     )
-
-    console.log(dispatch);
 
     const inc = () => {
         dispatch(incrementCount())
@@ -38,7 +36,7 @@ const Counter: React.FC = () => {
         dispatch(decrementCount())
     }
 
-    
+
     return (
         <div className={classes.root}>
             <Grid container direction="row"

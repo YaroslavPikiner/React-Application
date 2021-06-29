@@ -5,35 +5,35 @@ import Loader from 'react-loader-spinner';
 import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) =>
-  createStyles({
-    title: {
-      width: '200',
-      margin: 30,
-    },
-  })
+	createStyles({
+		title: {
+			width: '200',
+			margin: 30,
+		},
+	})
 );
 
 const Map = () => {
-  const [mapData, setMapData] = useState('');
-  const classes = useStyles();
+	const [mapData, setMapData] = useState('');
+	const classes = useStyles();
 
-  useEffect(() => {
-    setInterval(() => {
-      fetch('http://api.open-notify.org/iss-now.json')
-        .then((res) => res.json())
-        .then((res) => setMapData((mapData) => res.iss_position));
-    }, 3000);
-  }, []);
+	useEffect(() => {
+		setInterval(() => {
+			fetch('http://api.open-notify.org/iss-now.json')
+				.then((res) => res.json())
+				.then((res) => setMapData((mapData) => res.iss_position));
+		}, 3000);
+	}, []);
 
-  const containerStyle = {
-    width: '600px',
-    height: '600px',
-  };
+	const containerStyle = {
+		width: '600px',
+		height: '600px',
+	};
 
-  const center = {
-    lat: Number(mapData.latitude),
-    lng: Number(mapData.longitude),
-  };
+	const center = {
+		lat: Number(mapData.latitude),
+		lng: Number(mapData.longitude),
+	};
 
   return (
     <LoadScript googleMapsApiKey=''>

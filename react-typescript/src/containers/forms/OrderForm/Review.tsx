@@ -5,6 +5,9 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
+import { useDispatch, useSelector } from 'react-redux';
+import { IAppState } from '../../../redux/reducers/rootReducer';
+import { Basket, StoreCard } from '../../../type';
 
 const products = [
   { name: 'Product 1', desc: 'A nice thing', price: '$9.99' },
@@ -33,8 +36,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Review() {
+const Review = () => {
   const classes = useStyles();
+  const basketStore = useSelector((state: IAppState) => state.bookStoreReducer.offers)
+  const totalPrice = basketStore.reduce((acc: any,item: any) => {
+    return acc.price += item.price
+  })
+  console.log(totalPrice)
 
   return (
     <React.Fragment>
@@ -42,16 +50,16 @@ export default function Review() {
         Order summary
       </Typography>
       <List disablePadding>
-        {products.map((product) => (
-          <ListItem className={classes.listItem} key={product.name}>
-            <ListItemText primary={product.name} secondary={product.desc} />
-            <Typography variant="body2">{product.price}</Typography>
+        {basketStore.map((item: any) => (
+          <ListItem className={classes.listItem} key={item.id}>
+            <ListItemText primary={item.title} secondary={item.author} />
+            <Typography variant="body2">{item.price}</Typography>
           </ListItem>
         ))}
         <ListItem className={classes.listItem}>
           <ListItemText primary="Total" />
           <Typography variant="subtitle1" className={classes.total}>
-            $34.06
+            <p>${totalPrice} </p>
           </Typography>
         </ListItem>
       </List>
@@ -84,3 +92,5 @@ export default function Review() {
     </React.Fragment>
   );
 }
+
+export default Review

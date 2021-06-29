@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import AddressForm from './AddressForm';
 import PaymentForm from './PaymentForm';
 import Review from './Review';
+import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -48,6 +49,10 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(3),
         marginLeft: theme.spacing(1),
     },
+    toolBar: {
+        display: 'flex',
+        justifyContent: 'space-around'
+    }
 }));
 
 const steps = ['Shipping address', 'Payment details', 'Review your order'];
@@ -81,10 +86,18 @@ const OrderForm: React.FC = () => {
         <>
             <CssBaseline />
             <AppBar position="absolute" color="default" className={classes.appBar}>
-                <Toolbar>
+                <Toolbar className={classes.toolBar}>
                     <Typography variant="h6" color="inherit" noWrap>
                         Company name
                     </Typography>
+                    <Button variant="contained"
+                        color="primary">
+                        <Link to="/books">
+                            <Typography variant="h6" color="inherit" noWrap>
+                                Back
+                            </Typography>
+                        </Link>
+                    </Button>
                 </Toolbar>
             </AppBar>
             <main className={classes.layout}>

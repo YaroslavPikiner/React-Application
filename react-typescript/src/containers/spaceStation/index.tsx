@@ -8,7 +8,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Grid from '@material-ui/core/Grid';
 import { motion } from "framer-motion"
 
-
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
@@ -28,6 +27,13 @@ const SpaceStation = () => {
             .then(res => res.json())
             .then(res => setMapAstro(res.people))
     }, [])
+
+
+    const item = {
+        visible: { opacity: 1, x: 0 },
+        hidden: { opacity: 0, x: 100 },
+    };
+
 
     return (
         <>

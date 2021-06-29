@@ -1,15 +1,13 @@
 import * as React from "react"
 import { render } from "react-dom"
-import { createStore, applyMiddleware, Store } from "redux"
+import { createStore, applyMiddleware } from "redux"
 import { Provider } from "react-redux"
 import thunk from "redux-thunk"
-
 import App from "./App"
-import reducer from "./redux/reducer";
+import { rootReducer } from "./redux/reducers/rootReducer";
+import { composeWithDevTools } from 'redux-devtools-extension';
 
-const store: Store<ArticleState, ArticleAction> & {
-  dispatch: DispatchType
-} = createStore(reducer, applyMiddleware(thunk))
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))
 
 const rootElement = document.getElementById("root")
 render(

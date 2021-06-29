@@ -36,7 +36,6 @@ const Astro: React.FC<Prop> = ({ item }) => {
                 <Avatar className={classes.avatar} alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
                 <ListItemText primary={item.name} />
             </ListItem>
-
         </>
     )
 }

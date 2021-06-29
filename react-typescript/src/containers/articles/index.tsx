@@ -1,15 +1,17 @@
 import * as React from "react"
-import { useSelector, shallowEqual, useDispatch } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { motion } from "framer-motion"
-
 import Article from '../articles/Article';
 import AddArticle from "./AddArticle";
-import { addArticle, removeArticle } from "../../redux/actionCreators";
+import { addArticle, removeArticle } from "../../redux/article/articleCreators";
 import { Dispatch } from "redux"
+import { IArticle } from "../../type";
+import { IAppState } from "../../redux/reducers/rootReducer";
+
 
 const MainArticle: React.FC = () => {
     const articles: readonly IArticle[] = useSelector(
-        (state: ArticleState) => state.articles,
+        (state: IAppState) => state.articleReducer.articles,
     )
 
     const dispatch: Dispatch<any> = useDispatch()

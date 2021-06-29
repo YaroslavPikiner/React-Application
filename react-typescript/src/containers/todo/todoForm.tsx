@@ -17,7 +17,7 @@ const TodoForm: React.FC<TodoFormProps> = ({ inputTitle, changeHandler, addHandl
                         <label className='active' htmlFor="first_name">First Name</label>
                     </div>
                 </div>
-                <button onClick={addHandler} className="btn waves-effect waves-light" >Add
+                <button disabled={inputTitle ? false : true} onClick={addHandler} className="btn waves-effect waves-light" >Add
                     <i className="material-icons right">send</i>
                 </button>
             </div>

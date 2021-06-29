@@ -3,13 +3,13 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 
 const Navbar: React.FC = () => {
-
     return (
         <>
-
-            <nav>
+            <nav >
                 <div className="nav-wrapper indigo lighten-4">
-                    <a href="#" className="brand-logo left">ReactTs</a>
+                    <a href="#" className="brand-logo left"><Link to='/' className='logo'>
+                        React Ts App
+                    </Link></a>
                     <ul className="right hide-on-med-and-down">
                         <li>
                             <a href="#">  <Link to='/todo' className='logo'>
@@ -46,6 +46,13 @@ const Navbar: React.FC = () => {
                             <a href="#">
                                 <Link to='/space' className='logo'>
                                     Space Station
+                                </Link>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <Link to='/books' className='logo'>
+                                    Book Store
                                 </Link>
                             </a>
                         </li>
