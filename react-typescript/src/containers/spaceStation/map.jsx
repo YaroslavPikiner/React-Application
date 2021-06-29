@@ -56,7 +56,7 @@ const Map = () => {
         </GoogleMap>
       ) : (
         <Loader
-          type='TailSpin'
+          type='Grid'
           color='#00BFFF'
           height={100}
           width={100}

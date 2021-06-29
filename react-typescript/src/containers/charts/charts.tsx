@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Bar, Line, Pie, Radar, PolarArea, Bubble } from 'react-chartjs-2';
 import { IChart } from './interfaceChar';
+import { motion } from "framer-motion"
 
 interface Prop {
     data: IChart
 }
 
 const Charts: React.FC<Prop> = () => {
-
     const [lengthOfChartLabel, setLengthOfChartLabel] = useState<number>(6);
     const [data, setData] = useState({
         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
@@ -145,6 +145,7 @@ const Charts: React.FC<Prop> = () => {
 
 
     return (
+
         <div className='container mt2'>
             <div className="row center-align">
                 <a className="waves-effect waves-light btn indigo lighten-2" onClick={randomize}>randomize</a>
@@ -152,9 +153,18 @@ const Charts: React.FC<Prop> = () => {
                 <a className="waves-effect waves-light btn indigo lighten-2" onClick={remove}><i className="material-icons left">delete</i>delete</a>
             </div>
             <div className="row">
-                <div className="col s12 m6">
+                <motion.div
+                    className="col s12 m6"
+                    drag
+                    dragConstraints={{
+                        top: -20,
+                        left: -20,
+                        right: 20,
+                        bottom: 20,
+                    }}
+                >
                     <Bar type='bar' height={300} width={400} data={data} options={{ maintainAspectRatio: false }} />
-                </div>
+                </motion.div>
                 <div className="col s12 m6">
                     <Pie type='pie' height={300} width={400} data={data} options={{ maintainAspectRatio: false }} />
                 </div>

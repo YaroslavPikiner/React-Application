@@ -22,6 +22,9 @@ const useStyles = makeStyles((theme: Theme) =>
             overflow: 'auto',
             maxHeight: 300,
         },
+        avatar: {
+            marginRight: 20
+        }
     }),
 );
 
@@ -30,8 +33,8 @@ const Astro: React.FC<Prop> = ({ item }) => {
     return (
         <>
             <ListItem key={`item-${item.name}`} className={classes.root}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                <ListItemText primary={`Item ${item.name}`} />
+                <Avatar className={classes.avatar} alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                <ListItemText primary={item.name} />
             </ListItem>
 
         </>

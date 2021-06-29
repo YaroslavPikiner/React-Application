@@ -1,5 +1,6 @@
 import * as React from "react"
 import { useSelector, shallowEqual, useDispatch } from "react-redux"
+import { motion } from "framer-motion"
 
 import Article from '../articles/Article';
 import AddArticle from "./AddArticle";
@@ -21,14 +22,24 @@ const MainArticle: React.FC = () => {
     return (
         <main>
             <h1>My Articles</h1>
-            <AddArticle saveArticle={saveArticle} />
-            {articles.map((article: IArticle) => (
-                <Article
-                    key={article.id}
-                    article={article}
-                    removeArticle={removeArticle}
-                />
-            ))}
+            <motion.div
+                initial={{ opacity: 0, y: '-100%' }}
+                animate={{ opacity: 1, y: '0%' }}
+                transition={{
+                    type: "spring",
+                    stiffness: 260,
+                    damping: 20
+                }}
+            >
+                <AddArticle saveArticle={saveArticle} />
+                {articles.map((article: IArticle) => (
+                    <Article
+                        key={article.id}
+                        article={article}
+                        removeArticle={removeArticle}
+                    />
+                ))}
+            </motion.div>
         </main>
     )
 }
