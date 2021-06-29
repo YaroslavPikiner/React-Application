@@ -62,7 +62,7 @@ const TrainTicket = () => {
                 <Form.Item wrapperCol={{ span: 11 }} label='Date' name='date' rules={[{ required: false, message: 'Please input !' }]}><DatePicker /> </Form.Item>
                 <Form.Item wrapperCol={{ span: 10 }} label='Hours in road' name='roadHours' rules={[{ required: false }]}><Input /> </Form.Item>
                 <Form.Item wrapperCol={{ span: 11 }} label='Arrived' name='arrived' rules={[{ required: false, message: 'Please input !' }]}><DatePicker /> </Form.Item>
-                <Form.Item wrapperCol={{ span: 11 }}>
+                <Form.Item wrapperCol={{ span: 12 }}>
                     <Divider orientation="center" dashed={true} >Train ticket Form</Divider>
                 </Form.Item>
                 <Row >

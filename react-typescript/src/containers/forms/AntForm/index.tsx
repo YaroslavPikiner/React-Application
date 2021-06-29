@@ -2,6 +2,7 @@ import { Row, Col, Divider } from 'antd';
 import SimpleForm from './simpleForm';
 import RegistrationForm from './registrationForm';
 import TrainTicket from './trainTicket';
+import HiddenForm from './hiddenForm';
 import 'antd/dist/antd.css';
 
 const AntRoot: React.FC = () => {
@@ -23,6 +24,12 @@ const AntRoot: React.FC = () => {
                 <Divider orientation="center">Train ticket Form</Divider>
                 <Col span={12} offset={10}>
                     <TrainTicket />
+                </Col>
+            </Row>
+            <Row>
+                <Divider orientation="center">Hidden Form</Divider>
+                <Col span={12} offset={10}>
+                    <HiddenForm />
                 </Col>
             </Row>
         </>
