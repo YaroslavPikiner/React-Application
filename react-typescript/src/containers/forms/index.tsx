@@ -7,6 +7,7 @@ import OrderForm from './OrderForm/orderForm';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import AppBar from '@material-ui/core/AppBar';
+import AntForm from './AntForm/index';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
 
@@ -53,7 +54,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const Forms: React.FC = () => {
-    const [valTabs, setValTabs] = useState(1);
+    const [valTabs, setValTabs] = useState(3);
     const classes = useStyles();
 
     const handleChange = (event: any, newValue: any) => {
@@ -76,6 +77,8 @@ const Forms: React.FC = () => {
                         <Tab label="Form Log" {...a11yProps(0)} />
                         <Tab label="Form Reg" {...a11yProps(1)} />
                         <Tab label="Form Order" {...a11yProps(2)} />
+                        <Tab label="Ant Form" {...a11yProps(3)} />
+
                     </Tabs>
                 </AppBar>
                 <TabPanel value={valTabs} index={0}>
@@ -86,6 +89,9 @@ const Forms: React.FC = () => {
                 </TabPanel>
                 <TabPanel value={valTabs} index={2}>
                     <OrderForm />
+                </TabPanel>
+                <TabPanel value={valTabs} index={3}>
+                    <AntForm />
                 </TabPanel>
             </div>
 

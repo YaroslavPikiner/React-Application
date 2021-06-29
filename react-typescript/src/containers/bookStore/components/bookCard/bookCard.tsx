@@ -14,7 +14,6 @@ import { useDispatch } from 'react-redux';
 import { AddCardToBasket } from '../../../../redux/bookStore/bookStoreACreator';
 import { StoreCard } from '../../../../type';
 
-
 const BookCard: React.FC = () => {
     const [book, setBook] = useState<any>({});
     const [count, setCount] = useState<number>(0);
@@ -22,8 +21,6 @@ const BookCard: React.FC = () => {
     const [isDisableRemove, setIsDisableRemove] = useState<boolean>(true);
     const [open, setOpen] = useState<boolean>(false);
     const dispatch = useDispatch();
-
- 
 
     let history = useHistory();
     let loc = useLocation();
