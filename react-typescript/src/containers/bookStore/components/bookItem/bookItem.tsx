@@ -14,8 +14,9 @@ import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import { Link } from 'react-router-dom';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AddCardToBasket } from '../../../../redux/bookStore/bookStoreACreator';
+import { IAppState } from '../../../../redux/reducers/rootReducer';
 
 type Prop = {
     item: StoreCard
@@ -63,6 +64,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const BookItem: React.FC<Prop> = ({ item }) => {
     const [open, setOpen] = useState<boolean>(false);
+    const basketStore = useSelector((state: IAppState) => state.bookStoreReducer.offers)
     const dispatch = useDispatch()
     const classes = useStyles();
 

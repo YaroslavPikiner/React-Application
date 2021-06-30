@@ -39,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
 const Review = () => {
   const classes = useStyles();
   const basketStore = useSelector((state: IAppState) => state.bookStoreReducer.offers)
+  console.log(basketStore)
   const getTotalPrice = () => {
     const res = basketStore.map((item: any) => item.price)
     const totalPrice = res.reduce((prev, curr) => prev + curr)
@@ -77,7 +78,7 @@ const Review = () => {
             Payment details
           </Typography>
           <Grid container>
-            {payments.map((payment) => (
+            {payments ? payments.map((payment) => (
               <React.Fragment key={payment.name}>
                 <Grid item xs={6}>
                   <Typography gutterBottom>{payment.name}</Typography>
@@ -86,7 +87,7 @@ const Review = () => {
                   <Typography gutterBottom>{payment.detail}</Typography>
                 </Grid>
               </React.Fragment>
-            ))}
+            )) : <p>Lol</p> }
           </Grid>
         </Grid>
       </Grid>
