@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Cards from 'react-credit-cards';
+
 import {
     Form,
     Input,
@@ -30,9 +32,23 @@ type Prop = {
     sale: boolean,
 }
 
+interface IPay {
+    cvc: any,
+    expiry: any,
+    focus: any,
+    name: any,
+    number:any,
+}
 
 const TrainTicket = () => {
     const [form] = Form.useForm();
+    const [paymentForm, setPaymentForm] = useState<any>({
+        cvc: '',
+        expiry: '',
+        focused: '',
+        name: '',
+        number: '',
+    })
 
     const layout = {
         wrappedCol: {
@@ -49,6 +65,20 @@ const TrainTicket = () => {
         }
     }
 
+    const handleInputFocus = (e:React.ChangeEvent<HTMLInputElement>) => {
+        setPaymentForm((prev:IPay) => ({
+            ...prev,
+            focused: e.target.name
+        }))
+      }
+      
+     const handleInputChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setPaymentForm((prev:IPay) => ({
+            ...prev,
+            [name]:value
+        }))
+      }
 
     const onFinish = (values: any) => {
         console.log(values)
@@ -85,14 +115,43 @@ const TrainTicket = () => {
                 </Row>
                 <Row>
                     <Col span={6}>
-                        <Form.Item label='Card Data' name='cardData' rules={[{ required: true, message: 'Please input your last name!' }]}>
-                            <DatePicker />
-                        </Form.Item>
-                    </Col>
-                    <Col span={6}>
-                        <Form.Item label='cvv' name='cvv' rules={[{ required: true, message: 'Please input your last name!' }]}>
-                            <Input.Password min={3} max={3} />
-                        </Form.Item>
+                    <Cards
+                        cvc={paymentForm.cvc}
+                        expiry={paymentForm.expiry}
+                        focused={paymentForm.focus}
+                        name={paymentForm.name}
+                        number={paymentForm.number}
+                        />
+                        <form>
+                            <input
+                            type="tel"
+                            name="number"
+                            placeholder="Card Number"
+                            onChange={handleInputChange}
+                            onFocus={handleInputFocus}
+                        />
+                            <input
+                            type="tel"
+                            name="name"
+                            placeholder="Enter Name"
+                            onChange={handleInputChange}
+                            onFocus={handleInputFocus}
+                        />
+                             <input
+                            type="tel"
+                            name="expiry"
+                            placeholder="Enter expiry"
+                            onChange={handleInputChange}
+                            onFocus={handleInputFocus}
+                        />
+                             <input
+                            type="tel"
+                            name="cvc"
+                            placeholder="Enter cvc"
+                            onChange={handleInputChange}
+                            onFocus={handleInputFocus}
+                        />
+                        </form>
                     </Col>
                 </Row>
                 <Form.Item label='On saled' name='sale'><Switch /></Form.Item>

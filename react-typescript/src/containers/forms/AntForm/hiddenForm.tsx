@@ -34,7 +34,7 @@ const HiddenForm = () => {
 
     return (
         <Form form={form} name='fide form' onFinish={onFinish} >
-            <Form.Item name='firstName' label="First Name" >
+            <Form.Item  wrapperCol={{ span: 10 }} name='firstName' label="First Name" >
                 <Input onChange={handleChange}/>
             </Form.Item>
             <Form.Item name='lastName' label="First Name">
