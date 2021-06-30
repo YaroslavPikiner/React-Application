@@ -39,10 +39,11 @@ const useStyles = makeStyles((theme) => ({
 const Review = () => {
   const classes = useStyles();
   const basketStore = useSelector((state: IAppState) => state.bookStoreReducer.offers)
-  const totalPrice = basketStore.reduce((acc: any,item: any) => {
-    return acc.price += item.price
-  })
-  console.log(totalPrice)
+  const getTotalPrice = () => {
+    const res = basketStore.map((item: any) => item.price)
+    const totalPrice = res.reduce((prev, curr) => prev + curr)
+    return totalPrice
+  }
 
   return (
     <React.Fragment>
@@ -59,7 +60,7 @@ const Review = () => {
         <ListItem className={classes.listItem}>
           <ListItemText primary="Total" />
           <Typography variant="subtitle1" className={classes.total}>
-            <p>${totalPrice} </p>
+            <p>${basketStore ? getTotalPrice() : 0} </p>
           </Typography>
         </ListItem>
       </List>
