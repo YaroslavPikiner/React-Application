@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Cards from 'react-credit-cards';
+import 'react-credit-cards/es/styles-compiled.css';
 
 import {
     Form,
@@ -17,6 +18,7 @@ import {
     Divider
 } from 'antd';
 import 'antd/dist/antd.css';
+const { Option } = Select;
 
 type Prop = {
     from: string,
@@ -38,6 +40,7 @@ interface IPay {
     focus: any,
     name: any,
     number:any,
+    issuer: any
 }
 
 const TrainTicket = () => {
@@ -48,6 +51,7 @@ const TrainTicket = () => {
         focused: '',
         name: '',
         number: '',
+        issuer: '',
     })
 
     const layout = {
@@ -56,7 +60,6 @@ const TrainTicket = () => {
             span: 16,
         }
     }
-
 
     const btnLayout = {
         wrappedCol: {
@@ -80,13 +83,32 @@ const TrainTicket = () => {
         }))
       }
 
+      console.log(paymentForm)
+      const onGenderChange = (value: string) => {
+        switch (value) {
+            case 'visa':
+                setPaymentForm((prev:IPay) => ({
+                    ...prev,
+                    issuer:value
+                }))
+                return;
+            case 'mastercard':
+                setPaymentForm((prev:IPay) => ({
+                    ...prev,
+                    issuer:value
+                }))
+                return;
+            default: return value
+        }
+    }
+
     const onFinish = (values: any) => {
         console.log(values)
     }
 
     return (
         <>
-            <Form {...layout} onFinish={onFinish} form={form} name="basic" initialValues={{ remember: true }}>
+            <Form {...layout} onFinish={onFinish} form={form} name="basic2" initialValues={{ remember: true }}>
                 <Form.Item wrapperCol={{ span: 11 }} label="To" name='to' rules={[{ required: false, message: 'Please input' }]}> <Input /> </Form.Item>
                 <Form.Item wrapperCol={{ span: 11 }} label="From" name='form' rules={[{ required: false, message: 'Please input !' }]}> <Input /> </Form.Item>
                 <Form.Item wrapperCol={{ span: 11 }} label='Date' name='date' rules={[{ required: false, message: 'Please input !' }]}><DatePicker /> </Form.Item>
@@ -114,7 +136,7 @@ const TrainTicket = () => {
                     </Col>
                 </Row>
                 <Row>
-                    <Col span={6}>
+                    <Col span={12}>
                     <Cards
                         cvc={paymentForm.cvc}
                         expiry={paymentForm.expiry}
@@ -151,6 +173,14 @@ const TrainTicket = () => {
                             onChange={handleInputChange}
                             onFocus={handleInputFocus}
                         />
+                    <Select
+                        placeholder="Select a option and change input text above"
+                        onChange={onGenderChange}
+                        allowClear
+                    >
+                        <Option value="visa">Visa</Option>
+                        <Option value="mastercard">Mastercard</Option>
+                    </Select>
                         </form>
                     </Col>
                 </Row>
@@ -164,6 +194,5 @@ const TrainTicket = () => {
         </>
     )
 }
-
 
 export default TrainTicket;

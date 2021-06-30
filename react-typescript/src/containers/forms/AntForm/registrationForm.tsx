@@ -44,7 +44,7 @@ const RegistarationForm: React.FC = () => {
 
     return (
         <>
-            <Form form={form} name="basic" initialValues={{ remember: true }} onFinish={onFinish}>
+            <Form form={form} name="basic1" initialValues={{ remember: true }} onFinish={onFinish}>
                 <Row>
                     <Form.Item label='Firstname' name='firstname' rules={[{ required: true, message: 'Please input your first name!' }]}>
                         <Input />
