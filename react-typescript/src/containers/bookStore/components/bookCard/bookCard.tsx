@@ -10,9 +10,11 @@ import RemoveIcon from '@material-ui/icons/Remove';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
-import { useDispatch } from 'react-redux';
-import { AddCardToBasket } from '../../../../redux/bookStore/bookStoreACreator';
+import { useDispatch, useSelector } from 'react-redux';
+import { AddCardToBasket, removeItemFromBasket } from '../../../../redux/bookStore/bookStoreACreator';
 import { StoreCard } from '../../../../type';
+import { IAppState } from '../../../../redux/reducers/rootReducer';
+
 
 const BookCard: React.FC = () => {
     const [book, setBook] = useState<any>({});
@@ -21,6 +23,9 @@ const BookCard: React.FC = () => {
     const [isDisableRemove, setIsDisableRemove] = useState<boolean>(true);
     const [open, setOpen] = useState<boolean>(false);
     const dispatch = useDispatch();
+    const basketStore = useSelector((state: IAppState) => state.bookStoreReducer.offers)
+    const basketStoreId = basketStore.map((item: any) => item.id)
+
 
     let history = useHistory();
     let loc = useLocation();
@@ -38,8 +43,13 @@ const BookCard: React.FC = () => {
 
     }, []);
 
-    const handleClick = () => {
-        setOpen(true)
+    const handleClick = (item: StoreCard) => {
+        if (basketStoreId.includes(item.id)) {
+            dispatch(removeItemFromBasket(item.id));
+        } else {
+            dispatch(AddCardToBasket(item))
+            setOpen(true)
+        }
     }
 
     const handleClose = (event: React.SyntheticEvent | React.MouseEvent, reason?: string) => {
@@ -97,8 +107,8 @@ const BookCard: React.FC = () => {
                         </div>
                         <p className="description">{book.description}</p>
                         <div className="card__btns">
-                            <Button variant="contained" size="medium" color="primary" onClick={() => addOrder(book)}> <ShoppingCartIcon /><Link to={`/order`}>Buy now</Link></Button>
-                            <Button variant="contained" size="medium" color="primary" onClick={handleClick}>Add to basket</Button>
+                            <Button variant="contained" size="medium" color="primary" onClick={() => addOrder(book)}> <ShoppingCartIcon /><Link to={`/order`}>Купить</Link></Button>
+                            <Button variant="contained" size="medium" color="primary" onClick={() => handleClick(book)}> {basketStoreId.includes(book.id) ? 'Удалить' : `Добавить в корзину`}</Button>
                             <div className="card__counter">
                                 <Button onClick={addToBacketHandle} variant="contained" size="small" color="primary" disabled={isDisableAdd} ><AddIcon /></Button>
                                 <Typography gutterBottom variant="h5" component="h2">{count}</Typography>
@@ -115,7 +125,7 @@ const BookCard: React.FC = () => {
                     open={open}
                     autoHideDuration={6000}
                     onClose={handleClose}
-                    message="Added to backet"
+                    message={basketStoreId.includes(book.id) ? "Added to basket" : "Removed from basket" }
                     action={
                         <React.Fragment>
                             <Button color="secondary" size="small" onClick={handleClose}>

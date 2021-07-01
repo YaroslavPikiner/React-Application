@@ -14,8 +14,9 @@ import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import { Link } from 'react-router-dom';
-import { useDispatch } from "react-redux";
-import { AddCardToBasket } from '../../../../redux/bookStore/bookStoreACreator';
+import { useDispatch, useSelector } from "react-redux";
+import { AddCardToBasket, removeItemFromBasket } from '../../../../redux/bookStore/bookStoreACreator';
+import { IAppState } from "../../../../redux/reducers/rootReducer";
 
 type Prop = {
     item: StoreCard
@@ -63,6 +64,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const BookItem: React.FC<Prop> = ({ item }) => {
     const [open, setOpen] = useState<boolean>(false);
+    const basketStore = useSelector((state: IAppState) => state.bookStoreReducer.offers)
+    const basketStoreId = basketStore.map((item: any) => item.id)
     const dispatch = useDispatch()
     const classes = useStyles();
 
@@ -71,9 +74,14 @@ const BookItem: React.FC<Prop> = ({ item }) => {
         history.push(`/books/:${id}`);
     }
 
-    const handleClick = (item: StoreCard) => {
-        dispatch(AddCardToBasket(item))
-        setOpen(true)
+    const handleClick = (item: any) => {
+        if (basketStoreId.includes(item.id)) {
+            dispatch(removeItemFromBasket(item.id));
+        } else {
+            dispatch(AddCardToBasket(item))
+            setOpen(true)
+        }
+
     }
 
     const handleClose = (event: React.SyntheticEvent | React.MouseEvent, reason?: string) => {
@@ -82,6 +90,8 @@ const BookItem: React.FC<Prop> = ({ item }) => {
         }
         setOpen(false);
     };
+
+
 
     return (
         <>
@@ -108,7 +118,7 @@ const BookItem: React.FC<Prop> = ({ item }) => {
                             Подробнее
                         </Button>
                         <Button size="small" color="primary" onClick={() => handleClick(item)}>
-                            В корзину
+                            {basketStoreId.includes(item.id) ?  'Удалить' : `Добавить в корзину`}
                         </Button>
                     </CardActions>
                 </Card>
@@ -121,7 +131,7 @@ const BookItem: React.FC<Prop> = ({ item }) => {
                 open={open}
                 autoHideDuration={6000}
                 onClose={handleClose}
-                message="Added to backet"
+                message={basketStoreId.includes(item.id) ? "Removed from basket" :"Added to basket" }
                 action={
                     <>
                         <Button color="secondary" size="small" onClick={handleClose}>

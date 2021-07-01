@@ -5,7 +5,18 @@ import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 
-const AddressForm: React.FC = () => {  
+
+type AddressData = {
+  firstName: string,
+  lastName: string,
+  address1: string,
+  address2: string,
+  city: string,
+  zip: number,
+  country: string,
+}
+
+const AddressForm: React.FC = () => {
 
   return (
     <React.Fragment>
@@ -13,7 +24,7 @@ const AddressForm: React.FC = () => {
         Shipping address
       </Typography>
       <Grid container spacing={3}>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} >
           <TextField
             required
             id="firstName"

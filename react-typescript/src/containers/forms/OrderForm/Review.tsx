@@ -5,17 +5,9 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { IAppState } from '../../../redux/reducers/rootReducer';
-import { Basket, StoreCard } from '../../../type';
 
-const products = [
-  { name: 'Product 1', desc: 'A nice thing', price: '$9.99' },
-  { name: 'Product 2', desc: 'Another thing', price: '$3.45' },
-  { name: 'Product 3', desc: 'Something else', price: '$6.51' },
-  { name: 'Product 4', desc: 'Best thing of all', price: '$14.11' },
-  { name: 'Shipping', desc: '', price: 'Free' },
-];
 const addresses = ['1 Material-UI Drive', 'Reactville', 'Anytown', '99999', 'USA'];
 const payments = [
   { name: 'Card type', detail: 'Visa' },
@@ -38,11 +30,9 @@ const useStyles = makeStyles((theme) => ({
 
 const Review = () => {
   const classes = useStyles();
-  const basketStore = useSelector((state: IAppState) => state.bookStoreReducer.offers)
-  const totalPrice = basketStore.reduce((acc: any,item: any) => {
-    return acc.price += item.price
-  })
-  console.log(totalPrice)
+  const basketStore = useSelector((state: IAppState) => state.bookStoreReducer.offers);
+  const price = basketStore.map((item: any) => item.price);
+  const totalSum = price.reduce((prev, curr) => prev += curr);
 
   return (
     <React.Fragment>
@@ -59,7 +49,7 @@ const Review = () => {
         <ListItem className={classes.listItem}>
           <ListItemText primary="Total" />
           <Typography variant="subtitle1" className={classes.total}>
-            <p>${totalPrice} </p>
+            <p>${totalSum} </p>
           </Typography>
         </ListItem>
       </List>

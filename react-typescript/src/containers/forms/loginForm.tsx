@@ -10,7 +10,7 @@ type FormData = {
 const LoginForm: React.FC = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
     const onSubmit = handleSubmit(data => alert(JSON.stringify(data)));
-
+    
     return (
         <>
           

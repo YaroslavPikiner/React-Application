@@ -57,18 +57,7 @@ const useStyles = makeStyles((theme) => ({
 
 const steps = ['Shipping address', 'Payment details', 'Review your order'];
 
-const getStepContent = (step: number) => {
-    switch (step) {
-        case 0:
-            return <AddressForm />;
-        case 1:
-            return <PaymentForm />;
-        case 2:
-            return <Review />;
-        default:
-            throw new Error('Unknown step');
-    }
-}
+
 
 const OrderForm: React.FC = () => {
     const classes = useStyles();
@@ -81,6 +70,19 @@ const OrderForm: React.FC = () => {
     const handleBack = () => {
         setActiveStep(activeStep - 1);
     };
+
+    const getStepContent = (step: number) => {
+        switch (step) {
+            case 0:
+                return <AddressForm />;
+            case 1:
+                return <PaymentForm />;
+            case 2:
+                return <Review />;
+            default:
+                throw new Error('Unknown step');
+        }
+    }
 
     return (
         <>
@@ -137,6 +139,7 @@ const OrderForm: React.FC = () => {
                                         color="primary"
                                         onClick={handleNext}
                                         className={classes.button}
+                                        type='submit'
                                     >
                                         {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
                                     </Button>
