@@ -41,7 +41,7 @@ const Basket: React.FC = () => {
                     <div className="backet__price">
                         <p> Total Price: ${basketPrice ? basketPrice.reduce((prev, curr) => {
                             return prev + curr
-                        },0) : 0}</p>
+                        }, 0) : 0}</p>
                         <Button variant="contained" size="medium" color="primary" > <ShoppingCartIcon /><Link to={`/order`}>Buy now</Link></Button>
                     </div>
                 </div>

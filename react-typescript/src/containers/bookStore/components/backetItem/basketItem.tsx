@@ -10,7 +10,7 @@ type Prop = {
 const BasketItem: React.FC<Prop> = ({ item }) => {
     const dispatch = useDispatch();
 
-    const removeItem = (id: any) => {
+    const removeItem = (id: string | number) => {
         dispatch(removeItemFromBasket(id));
     }
 

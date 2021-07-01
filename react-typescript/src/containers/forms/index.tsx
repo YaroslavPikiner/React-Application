@@ -12,11 +12,11 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 
 interface TabPanelProps {
     children?: React.ReactNode;
-    index: any;
-    value: any;
+    index: unknown;
+    value: unknown;
 }
 
-function a11yProps(index: any) {
+function a11yProps(index: number) {
     return {
         id: `scrollable-auto-tab-${index}`,
         'aria-controls': `scrollable-auto-tabpanel-${index}`,
@@ -56,7 +56,7 @@ const Forms: React.FC = () => {
     const [valTabs, setValTabs] = useState(1);
     const classes = useStyles();
 
-    const handleChange = (event: any, newValue: any) => {
+    const handleChange = (event: unknown, newValue: number) => {
         setValTabs(newValue);
     };
 

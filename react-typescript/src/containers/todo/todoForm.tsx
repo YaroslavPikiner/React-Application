@@ -3,7 +3,7 @@ import React from 'react';
 interface TodoFormProps {
     inputTitle: string;
     changeHandler: (event: string) => void;
-    addHandler: (event: any) => void;
+    addHandler: (event: string | any) => void;
 }
 
 const TodoForm: React.FC<TodoFormProps> = ({ inputTitle, changeHandler, addHandler }) => {

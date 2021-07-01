@@ -41,7 +41,7 @@ const BookList: React.FC<Prop> = ({ booksStore }) => {
                 </Container>
 
                 <Box textAlign='center'>
-                    <Button className={classes.control} onClick={() => setList(list => list + 6)} variant="contained" > Show more </Button>
+                    <Button className={classes.control} onClick={() => setList((list: number) => list + 6)} variant="contained" > Show more </Button>
                 </Box>
 
             </div>
