@@ -4,18 +4,12 @@ import {
     Input,
     Button,
     Radio,
-    Select,
-    Cascader,
     DatePicker,
     InputNumber,
-    TreeSelect,
-    Switch,
     Row,
     Col,
-    Divider
 } from 'antd';
 import 'antd/dist/antd.css';
-import { truncate } from 'fs/promises';
 
 const HiddenForm = () => {
     const [isHidden, setIsHidden] = useState<boolean>(true);

@@ -1,9 +1,7 @@
-import { StoreCard, StoreCardState } from "../../type"
+import { StoreCardState } from "../../type"
 import * as actionTypes from "../actionTypes"
 import { Reducer } from 'redux'
-import { IAny, INewStoreCardAction } from "./bookStoreACreator"
-
-
+import { IAny } from "./bookStoreACreator"
 
 const initStoreCard: StoreCardState = {
     storeCards: [],

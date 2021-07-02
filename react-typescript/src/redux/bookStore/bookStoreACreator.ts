@@ -1,5 +1,5 @@
 import * as actionTypes from "../actionTypes";
-import { Basket, StoreCard } from "../../type";
+import { StoreCard } from "../../type";
 import { ActionCreator } from "redux";
 import { Dispatch } from "react";
 

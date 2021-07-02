@@ -8,22 +8,16 @@ type ItemTodo = {
 }
 
 const TodoItem: React.FC<ItemTodo> = ({ item, deleteHandle, onMarkDone }) => {
-
-
     return (
         <>
             <li style={{ padding: '20px' }} className={item.isCompleted ? "collection-item underscore  indigo lighten-4" : "collection-item"}>
-                <a style={{ margin: '20px' }} className="primary-content">
-                    <button className='btn btn-primary'>
+                    <button className='btn button btn-primary primary-content'>
                         <i onClick={() => onMarkDone(item)} className="material-icons">check</i>
                     </button>
-                </a>
                 {item.title}
-                <a className="secondary-content ">
-                    <button className='btn btn-primary '>
+                    <button className='btn button btn-primary secondary-content'>
                         <i onClick={() => deleteHandle(item)} className="material-icons">delete</i>
                     </button>
-                </a>
             </li>
         </>
     )
